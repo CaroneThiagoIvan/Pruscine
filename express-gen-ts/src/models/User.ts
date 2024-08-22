@@ -1,5 +1,7 @@
 import moment from 'moment';
-
+import { sequelize } from "../database";
+import { DataTypes } from 'sequelize';
+import { table } from 'console';
 
 // **** Variables **** //
 
@@ -10,11 +12,40 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 // **** Types **** //
 
 export interface IUser {
-  id: number;
-  name: string;
+  idusuario: number;
+  nombre: string;
   email: string;
-  created: Date;
+  direccion: string;
+  contrasenia: string;
 }
+
+export const Usuario = sequelize.define('Usuario', {
+  idusuario: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: true,
+    autoIncrement: true
+  },
+  nombre: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  contrasenia: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  direccion: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+}, {
+  timestamps: false,
+  tableName: 'Usuario'
+});
 
 
 // **** Functions **** //
@@ -22,50 +53,24 @@ export interface IUser {
 /**
  * Create new User.
  */
-function new_(
-  name?: string,
-  email?: string,
-  created?: Date,
-  id?: number, // id last cause usually set by db
+function newUser(
+  idusuario: number,
+  nombre: string,
+  email: string,
+  contrasenia: string,
+  direccion: string
 ): IUser {
   return {
-    id: (id ?? -1),
-    name: (name ?? ''),
-    email: (email ?? ''),
-    created: (created ? new Date(created) : new Date()),
+      idusuario: (idusuario ?? 0),
+      nombre: (nombre ?? ''),
+      email: (email ?? ''),
+      contrasenia: (contrasenia ?? ''),
+      direccion: (direccion ?? '')
   };
 }
 
-/**
- * Get user instance from object.
- */
-function from(param: object): IUser {
-  if (!isUser(param)) {
-    throw new Error(INVALID_CONSTRUCTOR_PARAM);
-  }
-  const p = param as IUser;
-  return new_(p.name, p.email, p.created, p.id);
-}
-
-/**
- * See if the param meets criteria to be a user.
- */
-function isUser(arg: unknown): boolean {
-  return (
-    !!arg &&
-    typeof arg === 'object' &&
-    'id' in arg && typeof arg.id === 'number' && 
-    'email' in arg && typeof arg.email === 'string' && 
-    'name' in arg && typeof arg.name === 'string' &&
-    'created' in arg && moment(arg.created as string | Date).isValid()
-  );
-}
-
-
-// **** Export default **** //
-
 export default {
-  new: new_,
-  from,
-  isUser,
-} as const;
+  Usuario,
+  newUser
+
+};

@@ -1,4 +1,4 @@
-import { IUser } from '@src/models/User';
+import { IUser, Usuario } from '@src/models/User';
 import { getRandomInt } from '@src/util/misc';
 import orm from './MockOrm';
 
@@ -8,14 +8,22 @@ import orm from './MockOrm';
 /**
  * Get one user.
  */
-async function getOne(email: string): Promise<IUser | null> {
-  const db = await orm.openDb();
-  for (const user of db.users) {
-    if (user.email === email) {
-      return user;
-    }
+async function getOne(id: number): Promise<IUser | null> {
+  try {
+
+    const usuario = await Usuario.findOne({
+      where: {
+        idusuario: id
+      }
+    });
+
+
+    return usuario ? usuario.toJSON() as IUser : null;
+
+  } catch (error) {
+    console.error("Error retrieving usuario:", error);
+    return null;
   }
-  return null;
 }
 
 /**

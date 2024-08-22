@@ -2,14 +2,37 @@
  * Express router paths go here.
  */
 
+import { getOptionSections } from "ts-command-line-args";
+
 
 export default {
-  Base: '/api',
+  Base: '/',
   Users: {
-    Base: '/users',
-    Get: '/all',
-    Add: '/add',
-    Update: '/update',
-    Delete: '/delete/:id',
+    Base: '/usuario',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
   },
+  Auth: {
+    Base: '/auth',
+    Login: '/'
+  },
+  Resena: {
+    Base: '/resena',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  Explorar: {
+    Base: '/explorar',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  }
 } as const;
