@@ -2,8 +2,8 @@ import moment from 'moment';
 import { sequelize } from "../database";
 import { DataTypes } from 'sequelize';
 import { table } from 'console';
-import { Pelicula } from './Pelicula';
 import { User } from './User';
+import { Pelicula } from './Pelicula';
 
 // **** Variables **** //
 
@@ -13,12 +13,12 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 
 // **** Types **** //
 
-export interface IResena {
+export interface ILista {
   usuario_idusuario: number;
   pelicula_idpelicula: number;
 }
 
-export const Resena = sequelize.define('resena', {
+export const Lista = sequelize.define('lista', {
   usuario_idusuario: {
     type: DataTypes.INTEGER,
     references: {
@@ -35,5 +35,5 @@ export const Resena = sequelize.define('resena', {
   }
 }, {
   timestamps: false,
-  tableName: 'resena'
+  tableName: 'lista'
 });

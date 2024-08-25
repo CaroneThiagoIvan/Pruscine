@@ -3,7 +3,7 @@ import { sequelize } from "../database";
 import { DataTypes } from 'sequelize';
 import { table } from 'console';
 import { Pelicula } from './Pelicula';
-import { User } from './User';
+import { Director } from './Director';
 
 // **** Variables **** //
 
@@ -13,17 +13,17 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 
 // **** Types **** //
 
-export interface IResena {
-  usuario_idusuario: number;
-  pelicula_idpelicula: number;
+export interface IPeliculaDirector {
+    pelicula_idpelicula: number;
+    director_iddirector: number;
 }
 
-export const Resena = sequelize.define('resena', {
-  usuario_idusuario: {
+export const PeliculaDirector = sequelize.define('peliculaDirector', {
+  director_iddirector: {
     type: DataTypes.INTEGER,
     references: {
-        model: User,
-        key: 'idusuario'
+        model: Director,
+        key: 'iddirector'
     }
   },
   pelicula_idpelicula: {
@@ -35,5 +35,5 @@ export const Resena = sequelize.define('resena', {
   }
 }, {
   timestamps: false,
-  tableName: 'resena'
+  tableName: 'peliculaDirector'
 });

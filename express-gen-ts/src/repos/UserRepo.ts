@@ -1,4 +1,4 @@
-import { IUser, Usuario } from '@src/models/User';
+import { IUser, User } from '@src/models/User';
 import { getRandomInt } from '@src/util/misc';
 import orm from './MockOrm';
 
@@ -11,7 +11,7 @@ import orm from './MockOrm';
 async function getOne(id: number): Promise<IUser | null> {
   try {
 
-    const usuario = await Usuario.findOne({
+    const usuario = await User.findOne({
       where: {
         idusuario: id
       }
@@ -32,7 +32,7 @@ async function getOne(id: number): Promise<IUser | null> {
 async function persists(id: number): Promise<boolean> {
   const db = await orm.openDb();
   for (const user of db.users) {
-    if (user.id === id) {
+    if (user.idusuario === id) {
       return true;
     }
   }
@@ -52,7 +52,7 @@ async function getAll(): Promise<IUser[]> {
  */
 async function add(user: IUser): Promise<void> {
   const db = await orm.openDb();
-  user.id = getRandomInt();
+  user.idusuario = getRandomInt();
   db.users.push(user);
   return orm.saveDb(db);
 }
@@ -63,12 +63,14 @@ async function add(user: IUser): Promise<void> {
 async function update(user: IUser): Promise<void> {
   const db = await orm.openDb();
   for (let i = 0; i < db.users.length; i++) {
-    if (db.users[i].id === user.id) {
+    if (db.users[i].idusuario === user.idusuario) {
       const dbUser = db.users[i];
       db.users[i] = {
         ...dbUser,
-        name: user.name,
+        nombre: user.nombre,
         email: user.email,
+        contrasenia: user.contrasenia,
+        direccion: user.direccion,
       };
       return orm.saveDb(db);
     }
@@ -81,7 +83,7 @@ async function update(user: IUser): Promise<void> {
 async function delete_(id: number): Promise<void> {
   const db = await orm.openDb();
   for (let i = 0; i < db.users.length; i++) {
-    if (db.users[i].id === id) {
+    if (db.users[i].idusuario === id) {
       db.users.splice(i, 1);
       return orm.saveDb(db);
     }

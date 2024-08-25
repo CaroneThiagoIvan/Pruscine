@@ -19,7 +19,7 @@ export interface IUser {
   contrasenia: string;
 }
 
-export const Usuario = sequelize.define('Usuario', {
+export const User = sequelize.define('usuario', {
   idusuario: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -44,33 +44,8 @@ export const Usuario = sequelize.define('Usuario', {
   }
 }, {
   timestamps: false,
-  tableName: 'Usuario'
+  tableName: 'usuario'
 });
 
 
-// **** Functions **** //
 
-/**
- * Create new User.
- */
-function newUser(
-  idusuario: number,
-  nombre: string,
-  email: string,
-  contrasenia: string,
-  direccion: string
-): IUser {
-  return {
-      idusuario: (idusuario ?? 0),
-      nombre: (nombre ?? ''),
-      email: (email ?? ''),
-      contrasenia: (contrasenia ?? ''),
-      direccion: (direccion ?? '')
-  };
-}
-
-export default {
-  Usuario,
-  newUser
-
-};
