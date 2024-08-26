@@ -1,7 +1,6 @@
 import { IUser, User } from '@src/models/User';
-import { getRandomInt } from '@src/util/misc';
-import orm from './MockOrm';
-
+import { generateToken } from '@src/util/jwt';
+import bcrypt from 'bcrypt';
 
 // **** Functions **** //
 
@@ -26,67 +25,75 @@ async function getOne(id: number): Promise<IUser | null> {
   }
 }
 
-/**
- * See if a user with the given id exists.
- */
+
 async function persists(id: number): Promise<boolean> {
-  const db = await orm.openDb();
-  for (const user of db.users) {
-    if (user.idusuario === id) {
-      return true;
-    }
+  try {
+    const usuario = await User.findByPk(id);
+    return !!usuario;
+
+  } catch (error) {
+    console.error("Error checking usuario existence:", error);
+    return false; 
   }
-  return false;
 }
 
-/**
- * Get all users.
- */
+
 async function getAll(): Promise<IUser[]> {
-  const db = await orm.openDb();
-  return db.users;
-}
+  try {
+    
+    const usuarios = await User.findAll();
+    return usuarios.map((usuario: { toJSON: () => IUser; }) => usuario.toJSON() as IUser);
 
-/**
- * Add one user.
- */
-async function add(user: IUser): Promise<void> {
-  const db = await orm.openDb();
-  user.idusuario = getRandomInt();
-  db.users.push(user);
-  return orm.saveDb(db);
-}
-
-/**
- * Update a user.
- */
-async function update(user: IUser): Promise<void> {
-  const db = await orm.openDb();
-  for (let i = 0; i < db.users.length; i++) {
-    if (db.users[i].idusuario === user.idusuario) {
-      const dbUser = db.users[i];
-      db.users[i] = {
-        ...dbUser,
-        nombre: user.nombre,
-        email: user.email,
-        contrasenia: user.contrasenia,
-        direccion: user.direccion,
-      };
-      return orm.saveDb(db);
-    }
+  } catch (error) {
+    console.error("Error retrieving usuarios:", error);
+    return []; 
   }
 }
 
-/**
- * Delete one user.
- */
+async function add(usuario: IUser): Promise<string | void> {
+  const contra = await bcrypt.hash(usuario.contrasenia, 10);
+  try {
+    await User.create({
+      idUsuario: usuario.idusuario,
+      nombre: usuario.nombre,
+      email: usuario.email,
+      contrasenia: contra,
+      direccion: usuario.direccion,
+    });
+  } catch (error) {
+    console.error("Error adding usuario:", error);
+  }
+}
+
+
+async function update(usuario: IUser): Promise<void> {
+  try {
+
+    await User.update(usuario, {
+      where: {
+        idUsuario: usuario.idusuario
+      }
+    });
+
+  } catch (error) {
+    console.error("Error updating usuario:", error);
+
+  }
+}
+
+
 async function delete_(id: number): Promise<void> {
-  const db = await orm.openDb();
-  for (let i = 0; i < db.users.length; i++) {
-    if (db.users[i].idusuario === id) {
-      db.users.splice(i, 1);
-      return orm.saveDb(db);
-    }
+  try {
+    
+    await User.destroy({
+      where: {
+        idUsuario: id
+      }
+    });
+
+  } catch (error) {
+    console.error("Error deleting usuario:", error);
+   
   }
 }
 

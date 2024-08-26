@@ -22,15 +22,21 @@ function getAll(): Promise<IUser[]> {
 /**
  * Add one user.
  */
-function addOne(user: IUser): Promise<void> {
-  return UserRepo.add(user);
+function addOne(user: IUser): Promise<string | void> {
+  try{
+    console.log(user);
+    return UserRepo.add(user);
+  } catch(err){
+    return err;
+  }
 }
+
 
 /**
  * Update one user.
  */
 async function updateOne(user: IUser): Promise<void> {
-  const persists = await UserRepo.persists(user.id);
+  const persists = await UserRepo.persists(user.idusuario);
   if (!persists) {
     throw new RouteError(
       HttpStatusCodes.NOT_FOUND,
