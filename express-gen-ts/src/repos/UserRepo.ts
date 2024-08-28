@@ -1,5 +1,4 @@
 import { IUser, User } from '@src/models/User';
-import { generateToken } from '@src/util/jwt';
 import bcrypt from 'bcrypt';
 
 // **** Functions **** //
