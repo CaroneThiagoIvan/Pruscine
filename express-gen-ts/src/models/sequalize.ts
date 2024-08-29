@@ -22,17 +22,17 @@ Director.belongsToMany(Pelicula, { through: 'peliculaDirector', foreignKey: 'dir
 
 // Relación User y Pelicula (N:N) para favoritos
 Pelicula.belongsToMany(User, { through: 'favoritoP', foreignKey: 'pelicula_idpelicula' });
-User.belongsToMany(Pelicula, { through: 'favoritoP', foreignKey: 'user_iduser' });
+User.belongsToMany(Pelicula, { through: 'favoritoP', foreignKey: 'usuario_idusuario' });
 
 // Relación User y Pelicula (N:N) para lista
 Pelicula.belongsToMany(User, { through: 'lista', foreignKey: 'pelicula_idpelicula' });
-User.belongsToMany(Pelicula, { through: 'lista', foreignKey: 'user_iduser' });
+User.belongsToMany(Pelicula, { through: 'lista', foreignKey: 'usuario_idusuario' });
 
 // Relación User y Pelicula (N:N) para reseñas
 Pelicula.belongsToMany(User, { through: 'resena', foreignKey: 'pelicula_idpelicula' });
-User.belongsToMany(Pelicula, { through: 'resena', foreignKey: 'user_iduser' });
+User.belongsToMany(Pelicula, { through: 'resena', foreignKey: 'usuario_idusuario' });
 
 // Relación Resena y User (N:N) para favoritos de reseñas
 Resena.belongsToMany(User, { through: 'favoritoR', foreignKey: 'resena_idresena' });
-User.belongsToMany(Resena, { through: 'favoritoR', foreignKey: 'user_iduser' });
+User.belongsToMany(Resena, { through: 'favoritoR', foreignKey: 'usuario_idusuario' });
 

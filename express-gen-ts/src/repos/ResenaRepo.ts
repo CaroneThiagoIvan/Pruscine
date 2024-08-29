@@ -23,6 +23,17 @@ async function getOne(usuario_idusuario: number, pelicula_idpelicula: number): P
   }
 }
 
+async function persists(usuario_idusuario: number, pelicula_idpelicula: number): Promise<boolean> {
+  try {
+    const resena = await Resena.findByPk(usuario_idusuario, pelicula_idpelicula);
+    return !!resena;
+
+  } catch (error) {
+    console.error("Error checking compra existence:", error);
+    return false; 
+  }
+}
+
 async function getAll(): Promise<IResena[]> {
   try {
     
@@ -88,6 +99,7 @@ async function delete_(usuario_idusuario: number, pelicula_idpelicula: number): 
 export default {
   getOne,
   getAll,
+  persists,
   add,
   update,
   delete: delete_,

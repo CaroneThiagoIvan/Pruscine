@@ -4,6 +4,8 @@ import jetValidator from 'jet-validator';
 import Paths from '../common/Paths';
 import { User } from '@src/models/User';
 import UserRoutes from './UserRoutes';
+import ExplorarRoutes from './ExplorarRoutes';
+import AuthRoutes from './AuthRoutes';
 
 
 // **** Variables **** //
@@ -14,34 +16,87 @@ const apiRouter = Router(),
 
 // ** Add UserRouter ** //
 
-const userRouter = Router();
+const UserRouter = Router();
+const ExplorarRepo = Router();
+const ResenaRepo = Router();
+const AuthRepo = Router();
 
 // Get all users
-userRouter.get(
+UserRouter.get(
   Paths.Users.Get,
   UserRoutes.getAll,
 );
 
 // Add one user
-userRouter.post(
+UserRouter.post(
   Paths.Users.Add,
   UserRoutes.add,
 );
 
 // Update one user
-userRouter.put(
+UserRouter.put(
   Paths.Users.Update,
   UserRoutes.update,
 );
 
 // Delete one user
-userRouter.delete(
+UserRouter.delete(
   Paths.Users.Delete,
   UserRoutes.delete,
 );
 
+ExplorarRepo.get(
+  Paths.Explorar.Get,
+  ExplorarRoutes.getAll,
+);
+
+ExplorarRepo.post(
+  Paths.Explorar.Add,
+  ExplorarRoutes.add,
+);
+
+ExplorarRepo.put(
+  Paths.Explorar.Update,
+  ExplorarRoutes.update,
+);
+
+ExplorarRepo.delete(
+  Paths.Explorar.Delete,
+  ExplorarRoutes.delete,
+);
+
+ResenaRepo.get(
+  Paths.Resena.Get,
+  ExplorarRoutes.getAll,
+);
+
+ResenaRepo.post(
+  Paths.Resena.Add,
+  ExplorarRoutes.add,
+);
+
+ResenaRepo.put(
+  Paths.Resena.Update,
+  ExplorarRoutes.update,
+);
+
+ResenaRepo.delete(
+  Paths.Resena.Delete,
+  ExplorarRoutes.delete,
+);
+
+AuthRepo.post(
+  Paths.Auth.Login,
+  AuthRoutes.login,
+);
+
+
+
 // Add UserRouter
-apiRouter.use(Paths.Users.Base, userRouter);
+apiRouter.use(Paths.Users.Base, UserRouter);
+apiRouter.use(Paths.Explorar.Base, ExplorarRepo);
+apiRouter.use(Paths.Resena.Base, ResenaRepo);
+apiRouter.use(Paths.Auth.Base, AuthRepo);
 
 
 // **** Export default **** //
