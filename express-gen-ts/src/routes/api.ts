@@ -2,7 +2,6 @@ import { Router } from 'express';
 import jetValidator from 'jet-validator';
 
 import Paths from '../common/Paths';
-import { User } from '@src/models/User';
 import UserRoutes from './UserRoutes';
 import ExplorarRoutes from './ExplorarRoutes';
 import AuthRoutes from './AuthRoutes';
@@ -10,8 +9,7 @@ import AuthRoutes from './AuthRoutes';
 
 // **** Variables **** //
 
-const apiRouter = Router(),
-  validate = jetValidator();
+const apiRouter = Router();
 
 
 // ** Add UserRouter ** //
@@ -21,7 +19,6 @@ const ExplorarRepo = Router();
 const ResenaRepo = Router();
 const AuthRepo = Router();
 
-// Get all users
 UserRouter.get(
   Paths.Users.Get,
   UserRoutes.getAll,

@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { sequelize } from "../database";
 import { DataTypes } from 'sequelize';
 import { table } from 'console';
 
@@ -16,18 +15,4 @@ export interface IPais {
   nombre: string;
 }
 
-export const Pais = sequelize.define('pais', {
-  idpais: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    allowNull: true,
-    autoIncrement: true
-  },
-  nombre: {
-    type: DataTypes.STRING,
-    allowNull: false
-    }
-}, {
-  timestamps: false,
-  tableName: 'pais'
-});
+

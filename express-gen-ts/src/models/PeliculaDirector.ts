@@ -1,9 +1,6 @@
 import moment from 'moment';
-import { sequelize } from "../database";
 import { DataTypes } from 'sequelize';
 import { table } from 'console';
-import { Pelicula } from './Pelicula';
-import { Director } from './Director';
 
 // **** Variables **** //
 
@@ -18,22 +15,3 @@ export interface IPeliculaDirector {
     director_iddirector: number;
 }
 
-export const PeliculaDirector = sequelize.define('peliculaDirector', {
-  director_iddirector: {
-    type: DataTypes.INTEGER,
-    references: {
-        model: Director,
-        key: 'iddirector'
-    }
-  },
-  pelicula_idpelicula: {
-    type: DataTypes.INTEGER,
-    references: {
-        model: Pelicula,
-        key: 'idpelicula'
-    }
-  }
-}, {
-  timestamps: false,
-  tableName: 'peliculaDirector'
-});

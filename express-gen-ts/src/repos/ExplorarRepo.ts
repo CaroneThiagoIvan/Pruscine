@@ -1,6 +1,5 @@
-import { IPelicula, Pelicula } from '@src/models/Pelicula';
-import { IResena, Resena } from '@src/models/Resena';
-import e from 'express';
+import { IPelicula } from '@src/models/Pelicula';
+import Pelicula from '@src/models/pelicula.model';
 
 // **** Functions **** //
 

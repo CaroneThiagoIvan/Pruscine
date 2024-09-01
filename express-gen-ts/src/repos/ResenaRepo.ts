@@ -1,5 +1,5 @@
-import { IResena, Resena } from '@src/models/Resena';
-
+import { IResena } from "@src/models/Resena";
+import Resena from "@src/models/resena.model";
 // **** Functions **** //
 
 /**
@@ -24,14 +24,12 @@ async function getOne(usuario_idusuario: number, pelicula_idpelicula: number): P
 }
 
 async function persists(usuario_idusuario: number, pelicula_idpelicula: number): Promise<boolean> {
-  try {
-    const resena = await Resena.findByPk(usuario_idusuario, pelicula_idpelicula);
-    return !!resena;
-
-  } catch (error) {
-    console.error("Error checking compra existence:", error);
-    return false; 
-  }
+  return Resena.findOne({ where: { usuario_idusuario: usuario_idusuario, pelicula_idpelicula:pelicula_idpelicula } }).then((resena) => {
+    if (resena) {
+      return true;
+    }
+    return false;
+  });
 }
 
 async function getAll(): Promise<IResena[]> {

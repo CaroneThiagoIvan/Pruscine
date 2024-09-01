@@ -1,4 +1,5 @@
-import { IUser, User } from '@src/models/User';
+import { IUser } from '@src/models/User';
+import User from '@src/models/user.model';
 import bcrypt from 'bcrypt';
 
 // **** Functions **** //
@@ -57,7 +58,7 @@ async function add(usuario: IUser): Promise<string | void> {
       nombre: usuario.nombre,
       email: usuario.email,
       contrasenia: contra,
-      direccion: usuario.direccion,
+      fechaNacimiento: usuario.fechaNacimiento,
     });
   } catch (error) {
     console.error("Error adding usuario:", error);

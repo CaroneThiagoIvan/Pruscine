@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { sequelize } from "../database";
 import { DataTypes } from 'sequelize';
 import { table } from 'console';
 
@@ -18,26 +17,3 @@ export interface IActor {
   descripcion: string;
 }
 
-export const Actor = sequelize.define('actor', {
-  idactor: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    allowNull: true,
-    autoIncrement: true
-  },
-  nombre: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  fechaNacimento: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  descripcion: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
-}, {
-  timestamps: false,
-  tableName: 'actor'
-});

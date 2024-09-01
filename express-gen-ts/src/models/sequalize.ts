@@ -1,10 +1,10 @@
 // Importar los modelos
-import { Pelicula } from './Pelicula';
-import { Genero } from './Genero';
-import { Actor } from './Actor';
-import { Director } from './Director';
-import { User } from './User';
-import { Resena } from './Resena';
+import  Pelicula  from './pelicula.model';
+import  Genero  from './genero.model';
+import  Actor  from './actor.model';
+import  Director  from './director.model';
+//import  User  from './user.model';
+import  Resena  from './resena.model';
 
 
 
@@ -35,4 +35,5 @@ User.belongsToMany(Pelicula, { through: 'resena', foreignKey: 'usuario_idusuario
 // Relación Resena y User (N:N) para favoritos de reseñas
 Resena.belongsToMany(User, { through: 'favoritoR', foreignKey: 'resena_idresena' });
 User.belongsToMany(Resena, { through: 'favoritoR', foreignKey: 'usuario_idusuario' });
+
 

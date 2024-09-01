@@ -18,8 +18,7 @@ import EnvVars from '@src/common/EnvVars';
 import HttpStatusCodes from '@src/common/HttpStatusCodes';
 import RouteError from '@src/common/RouteError';
 import { NodeEnvs } from '@src/common/misc';
-import { connect } from './database';
-
+import "./sql/connection";
 
 // **** Variables **** //
 
@@ -85,7 +84,6 @@ app.get('/users', (_: Request, res: Response) => {
   return res.sendFile('users.html', { root: viewsDir });
 });
 
-connect();
 
 // **** Export default **** //
 

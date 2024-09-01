@@ -20,29 +20,3 @@ export interface IFavotitoR {
   resena_pelicula_idpelicula: number;
 }
 
-export const FavoritoP = sequelize.define('favoritoP', {
-  usuario_idusuario: {
-    type: DataTypes.INTEGER,
-    references: {
-        model: User,
-        key: 'idusuario'
-    }
-  },
-  resena_usuario_idusuario: {
-    type: DataTypes.INTEGER,
-    references: {
-        model: Resena,
-        key: 'idpelicula'
-    }
-  },
-    resena_pelicula_idpelicula: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: Resena,
-            key: 'idusuario'
-        }
-    }
-}, {
-  timestamps: false,
-  tableName: 'favoritoP'
-});

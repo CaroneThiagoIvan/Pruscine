@@ -1,5 +1,4 @@
 import moment from 'moment';
-import { sequelize } from "../database";
 import { DataTypes } from 'sequelize';
 import { table } from 'console';
 
@@ -15,37 +14,11 @@ export interface IUser {
   idusuario: number;
   nombre: string;
   email: string;
-  direccion: string;
   contrasenia: string;
+  fechaNacimiento: Date;
 }
 
-export const User = sequelize.define('usuario', {
-  idusuario: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    allowNull: true,
-    autoIncrement: true
-  },
-  nombre: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  contrasenia: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  direccion: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
-}, {
-  timestamps: false,
-  tableName: 'usuario'
-});
+
 
 
 
