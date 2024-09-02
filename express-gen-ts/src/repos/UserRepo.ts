@@ -51,8 +51,16 @@ async function getAll(): Promise<IUser[]> {
 }
 
 async function add(usuario: IUser): Promise<string | void> {
-  const contra = await bcrypt.hash(usuario.contrasenia, 10);
   try {
+    // Verificar que el usuario y la contraseña estén definidos
+    if (!usuario || !usuario.contrasenia) {
+      throw new Error('Usuario o contraseña no definidos.');
+    }
+
+    // Hashear la contraseña
+    const contra = await bcrypt.hash(usuario.contrasenia, 10);
+
+    // Crear el usuario en la base de datos
     await User.create({
       idUsuario: usuario.idusuario,
       nombre: usuario.nombre,
@@ -60,10 +68,13 @@ async function add(usuario: IUser): Promise<string | void> {
       contrasenia: contra,
       fechaNacimiento: usuario.fechaNacimiento,
     });
+
+    return 'Usuario creado con éxito';
   } catch (error) {
-    console.error("Error adding usuario:", error);
+    console.error('Error adding usuario:', error);
   }
 }
+
 
 
 async function update(usuario: IUser): Promise<void> {
