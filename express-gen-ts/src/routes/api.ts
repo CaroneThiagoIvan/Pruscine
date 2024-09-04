@@ -24,6 +24,11 @@ UserRouter.get(
   UserRoutes.getAll,
 );
 
+UserRouter.get(
+  Paths.Users.GetOne,
+  UserRoutes.getOne,
+);
+
 // Add one user
 UserRouter.post(
   Paths.Users.Add,

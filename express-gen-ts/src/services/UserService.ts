@@ -18,6 +18,9 @@ export const USER_NOT_FOUND_ERR = 'User not found';
 function getAll(): Promise<IUser[]> {
   return UserRepo.getAll();
 }
+async function getOne(id :number): Promise<IUser | null> {
+  return UserRepo.getOne(id);
+}
 
 /**
  * Add one user.
@@ -36,6 +39,7 @@ function addOne(user: IUser): Promise<string | void> {
  * Update one user.
  */
 async function updateOne(user: IUser): Promise<void> {
+  if(user.idusuario){
   const persists = await UserRepo.persists(user.idusuario);
   if (!persists) {
     throw new RouteError(
@@ -43,6 +47,7 @@ async function updateOne(user: IUser): Promise<void> {
       USER_NOT_FOUND_ERR,
     );
   }
+}
   // Return user
   return UserRepo.update(user);
 }
@@ -67,6 +72,7 @@ async function _delete(id: number): Promise<void> {
 
 export default {
   getAll,
+  getOne,
   addOne,
   updateOne,
   delete: _delete,

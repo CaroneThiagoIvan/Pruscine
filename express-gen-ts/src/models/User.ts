@@ -11,7 +11,7 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 // **** Types **** //
 
 export interface IUser {
-  idusuario: number;
+  idusuario?: number;
   nombre: string;
   email: string;
   contrasenia: string;

@@ -1,8 +1,8 @@
 import AuthRepo from '../repos/AuthRepo';
 
-async function login(email: string, password: string): Promise<string>{
+async function login(usuario: any): Promise<string>{
     try {
-       return await AuthRepo.login(email, password);
+       return await AuthRepo.login(usuario);
     } catch (error) {
         throw error;
     }

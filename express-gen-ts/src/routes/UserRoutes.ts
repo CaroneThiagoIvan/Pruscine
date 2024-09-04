@@ -10,6 +10,12 @@ import { IReq, IRes } from './types/express/misc';
 /**
  * Get all users.
  */
+async function getOne(req: IReq, res: IRes) {
+  const id = +req.params.id;
+  const user = await UserService.getOne(id);
+  return res.status(HttpStatusCodes.OK).json( user );
+}
+
 async function getAll(_: IReq, res: IRes) {
   const users = await UserService.getAll();
   return res.status(HttpStatusCodes.OK).json({ users });
@@ -19,6 +25,7 @@ async function getAll(_: IReq, res: IRes) {
  * Add one user.
  */
 async function add(req: IReq<{user: IUser}>, res: IRes) {
+  console.log(req.body)
   const { user } = req.body;
   await UserService.addOne(user);
   return res.status(HttpStatusCodes.CREATED).end();
@@ -47,6 +54,7 @@ async function delete_(req: IReq, res: IRes) {
 
 export default {
   getAll,
+  getOne,
   add,
   update,
   delete: delete_,

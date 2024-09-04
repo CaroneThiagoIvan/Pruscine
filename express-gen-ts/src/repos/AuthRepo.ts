@@ -3,14 +3,14 @@ import {generateToken} from '../util/jwt';
 import User from '@src/models/user.model';
 
 
-async function login(email: string, password: string): Promise<string>{
+async function login(usuario: any): Promise<string>{
     const user = await User.findOne({ 
-        where: { email: email }
+        where: { email: usuario.email }
     });
     if (!user) {
         throw new Error('User not found');
     }
-    const equals = await bcrypt.compare(password, user.contrasenia);
+    const equals = await bcrypt.compare(usuario.contrasenia, user.contrasenia);
 
 
     if (equals) {

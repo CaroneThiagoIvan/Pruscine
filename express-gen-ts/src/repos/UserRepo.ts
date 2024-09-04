@@ -30,7 +30,6 @@ async function persists(id: number): Promise<boolean> {
   try {
     const usuario = await User.findByPk(id);
     return !!usuario;
-
   } catch (error) {
     console.error("Error checking usuario existence:", error);
     return false; 
@@ -62,7 +61,6 @@ async function add(usuario: IUser): Promise<string | void> {
 
     // Crear el usuario en la base de datos
     await User.create({
-      idUsuario: usuario.idusuario,
       nombre: usuario.nombre,
       email: usuario.email,
       contrasenia: contra,
