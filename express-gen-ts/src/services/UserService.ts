@@ -39,6 +39,7 @@ function addOne(user: IUser): Promise<string | void> {
  * Update one user.
  */
 async function updateOne(user: IUser): Promise<void> {
+  console.log(user);
   if(user.idusuario){
   const persists = await UserRepo.persists(user.idusuario);
   if (!persists) {

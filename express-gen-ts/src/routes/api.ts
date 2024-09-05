@@ -5,6 +5,7 @@ import Paths from '../common/Paths';
 import UserRoutes from './UserRoutes';
 import ExplorarRoutes from './ExplorarRoutes';
 import AuthRoutes from './AuthRoutes';
+import { authenticateToken } from '@src/middleware/validateToken';
 
 
 // **** Variables **** //
@@ -38,6 +39,7 @@ UserRouter.post(
 // Update one user
 UserRouter.put(
   Paths.Users.Update,
+  authenticateToken,
   UserRoutes.update,
 );
 

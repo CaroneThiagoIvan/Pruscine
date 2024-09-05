@@ -34,8 +34,8 @@ async function add(req: IReq<{user: IUser}>, res: IRes) {
 /**
  * Update one user.
  */
-async function update(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
+async function update(req: IReq<IUser>, res: IRes) {
+  const user = req.body;
   await UserService.updateOne(user);
   return res.status(HttpStatusCodes.OK).end();
 }
