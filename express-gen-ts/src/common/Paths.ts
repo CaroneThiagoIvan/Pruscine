@@ -34,5 +34,13 @@ export default {
     Add: '/',
     Update: '/:id',
     Delete: '/:id',
+  },
+  Pelicula: {
+    Base: '/pelicula',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
   }
 } as const;

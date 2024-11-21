@@ -1,30 +1,44 @@
 import jwt from "jsonwebtoken";
-import { Request as IReq, Response as IRes, NextFunction as INext } from "express";
+import { Request, Response, NextFunction } from "express";
 
+// Clave secreta definida directamente
+const secretKey = "prusci"; 
 
 export interface Payload {
-    email: string;
-    contrasenia: string;
-}
-export interface CustomRequest extends IReq {
-    payload: Payload;
+  id: number;
+  email: string;
+  rol: boolean;
 }
 
-export const authenticateToken = (req: IReq, res:IRes, next: INext) => {
-    const authHeader = req.headers['authorization'];
-    console.log(authHeader);
-    const token = authHeader;
-    console.log(token);
-    console.log(process.env.TOKEN_SECRET);
-    if (token == null) return res.sendStatus(401);
-
-    jwt.verify(token, "prusci", (err, user) => {
-        if (err) return res.sendStatus(403).json(err);
-        if (user) {
-            (req as CustomRequest).payload = user as Payload;
-            next();
-        } else {
-            res.sendStatus(500); 
-        }
-    });
+export interface CustomRequest extends Request {
+  payload?: Payload;
 }
+
+// Middleware para autenticar el token
+export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers["authorization"]; 
+
+  if (!authHeader) {
+    return res.status(401).json({ message: "Token no proporcionado" });
+  }
+
+  
+  const token = authHeader.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "Token no válido" });
+  }
+
+ 
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: "Token inválido o expirado", error: err });
+    }
+
+    if (decoded) {
+      (req as CustomRequest).payload = decoded as Payload; 
+      next();
+    } else {
+      res.status(500).json({ message: "Error interno en la verificación del token" });
+    }
+  });
+};

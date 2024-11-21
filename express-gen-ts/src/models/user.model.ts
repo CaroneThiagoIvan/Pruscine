@@ -21,6 +21,14 @@ class User extends Model {
   @Column(DataType.TEXT)
   contrasenia!: string;
 
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false, 
+    defaultValue: false, 
+  })
+  rol!: boolean;
+  
+
   @Column(DataType.DATE)
   fechaNacimiento: Date = new Date();
 }

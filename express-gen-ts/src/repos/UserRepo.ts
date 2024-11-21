@@ -65,6 +65,7 @@ async function add(usuario: IUser): Promise<string | void> {
       email: usuario.email,
       contrasenia: contra,
       fechaNacimiento: usuario.fechaNacimiento,
+      rol: usuario.rol
     });
 
     return 'Usuario creado con éxito';
@@ -78,17 +79,21 @@ async function add(usuario: IUser): Promise<string | void> {
 async function update(usuario: IUser): Promise<void> {
   try {
 
+    if (usuario.contrasenia) {
+      usuario.contrasenia = await bcrypt.hash(usuario.contrasenia, 10);
+    }
+
     await User.update(usuario, {
       where: {
-        idUsuario: usuario.idusuario
-      }
+        idUsuario: usuario.idusuario,
+      },
     });
 
   } catch (error) {
     console.error("Error updating usuario:", error);
-
   }
 }
+
 
 
 async function delete_(id: number): Promise<void> {
