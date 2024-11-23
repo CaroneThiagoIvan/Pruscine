@@ -18,8 +18,8 @@ import { Sequelize } from 'sequelize-typescript';
 const sequelize = new Sequelize({
   database: 'prucine',
   dialect: 'mysql',
-  username: 'alumno',
-  password: 'alumnoipm',
+  username: 'root',
+  password: 'Cuker33632005',
   host: 'localhost',
   port: 3306,
   logging: console.log,

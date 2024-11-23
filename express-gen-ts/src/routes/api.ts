@@ -7,7 +7,9 @@ import ExplorarRoutes from './ExplorarRoutes';
 import AuthRoutes from './AuthRoutes';
 import { authenticateToken } from '@src/middleware/validateToken';
 import PeliculaRoutes from './PeliculaRoutes';
-import { checkUserRole } from '@src/middleware/checkUser';
+import { checkUserRole } from '@src/middleware/checkUser';  
+import ListaRoutes from './ListaRoutes';
+
 
 
 // **** Variables **** //
@@ -22,6 +24,7 @@ const ExplorarRepo = Router();
 const ResenaRepo = Router();
 const AuthRepo = Router();
 const PeliRepo = Router();
+const ListaRepo = Router();
 
 UserRouter.get(
   Paths.Users.Get,
@@ -123,6 +126,26 @@ PeliRepo.delete(
   PeliculaRoutes.delete,
 );
 
+ListaRepo.get(
+  Paths.Lista.Get,
+  ListaRoutes.getAll,
+);
+
+ListaRepo.get(
+  Paths.Lista.GetOne,
+  ListaRoutes.getOne,
+);  
+
+ListaRepo.post(
+  Paths.Lista.Add,
+  ListaRoutes.add,
+);
+
+ListaRepo.delete(
+  Paths.Lista.Delete,
+  ListaRoutes.delete,
+);
+
 
 // Add UserRouter
 apiRouter.use(Paths.Users.Base, UserRouter);
@@ -130,6 +153,7 @@ apiRouter.use(Paths.Explorar.Base, ExplorarRepo);
 apiRouter.use(Paths.Resena.Base, ResenaRepo);
 apiRouter.use(Paths.Auth.Base, AuthRepo);
 apiRouter.use(Paths.Pelicula.Base, PeliRepo);
+apiRouter.use(Paths.Lista.Base, ListaRepo);
 
 // **** Export default **** //
 

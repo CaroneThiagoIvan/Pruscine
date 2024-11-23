@@ -1,11 +1,15 @@
-import { Table, Column, Model, ForeignKey, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, ForeignKey, DataType, PrimaryKey, HasMany } from 'sequelize-typescript';
 import Pais from './pais.model';
+import Genero from './genero.model';
+import Actor from './actor.model';
+import Director from './director.model';
 
 @Table({
   tableName: 'pelicula',
   timestamps: false,
 })
 class Pelicula extends Model {
+  @PrimaryKey
   @Column({
     primaryKey: true,
     autoIncrement: true,
@@ -19,10 +23,20 @@ class Pelicula extends Model {
   anioPublicado!: Date;
 
   @ForeignKey(() => Pais)
-  @Column({
-    primaryKey: true,
-  })
+  @Column
   paisIdpais!: number;
+
+  @ForeignKey(() => Genero)
+  @Column
+  generoIdgenero!: number;
+
+  @ForeignKey(() => Actor)
+  @Column
+  peliculaIdactor!: number;
+
+  @ForeignKey(() => Director)
+  @Column
+  peliculaIddirector!: number;
 }
 
 export default Pelicula;

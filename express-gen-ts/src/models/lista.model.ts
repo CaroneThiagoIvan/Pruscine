@@ -1,4 +1,4 @@
-import { Table, Column, Model, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, ForeignKey, DataType } from 'sequelize-typescript';
 import Usuario from './user.model';
 import Pelicula from './pelicula.model';
 
@@ -18,6 +18,9 @@ class Lista extends Model {
     primaryKey: true,
   })
   peliculaIdpelicula!: number;
+
+  @Column(DataType.STRING)
+  nombre!: string;
 }
 
 export default Lista;

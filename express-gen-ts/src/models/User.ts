@@ -17,6 +17,7 @@ export interface IUser {
   contrasenia: string;
   rol: boolean;
   fechaNacimiento: Date;
+  
 }
 
 

@@ -42,5 +42,13 @@ export default {
     Add: '/',
     Update: '/:id',
     Delete: '/:id',
-  }
+  },
+  Lista: {
+    Base: '/lista',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
 } as const;

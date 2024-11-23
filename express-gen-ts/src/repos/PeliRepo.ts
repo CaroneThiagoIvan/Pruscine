@@ -55,7 +55,9 @@ async function add(pelicula: IPelicula): Promise<string | void> {
     await Pelicula.create({
       nombre: pelicula.nombre,
       anioPublicado: pelicula.anioPublicado,
-      paisIdpais: pelicula.pais_idpais,
+      generoIDgenero: pelicula.genero_idgenero,
+      peliculaIDactor: pelicula.pelicula_idactor,
+      peliculaIDdirector: pelicula.pelicula_iddirector
     });
 
     return 'Pelicula creada con éxito';
@@ -73,7 +75,9 @@ async function update(pelicula: IPelicula): Promise<void> {
 let peliculaupdate = {
     nombre: pelicula.nombre,
     anioPublicado: pelicula.anioPublicado,
-    paisIdpais: pelicula.pais_idpais
+    generoIDgenero: pelicula.genero_idgenero,
+    peliculaIDactor: pelicula.pelicula_idactor,
+    peliculaIDdirector: pelicula.pelicula_iddirector
 }
     await Pelicula.update(peliculaupdate, {
       where: {
