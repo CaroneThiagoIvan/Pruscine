@@ -1,44 +1,37 @@
 import jwt from "jsonwebtoken";
-import { Request, Response, NextFunction } from "express";
+import { Request as IReq, Response as IRes, NextFunction as INext } from "express";
 
-// Clave secreta definida directamente
-const secretKey = "prusci"; 
 
 export interface Payload {
-  id: number;
-  email: string;
-  rol: boolean;
+    email: string;
+    contrasenia: string;
+    rol: boolean;
+}
+export interface CustomRequest extends IReq {
+    payload: Payload;
 }
 
-export interface CustomRequest extends Request {
-  payload?: Payload;
-}
+export const authenticateToken = (req: IReq, res: IRes, next: INext) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
 
-// Middleware para autenticar el token
-export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
-  const authHeader = req.headers["authorization"]; 
-
-  if (!authHeader) {
-    return res.status(401).json({ message: "Token no proporcionado" });
-  }
-
-  
-  const token = authHeader.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "Token no válido" });
+    console.error("No se encontró un token en el encabezado.");
+    return res.sendStatus(401); // Sin autorización
   }
 
- 
-  jwt.verify(token, secretKey, (err, decoded) => {
+  jwt.verify(token, "prusci", (err, user) => {
     if (err) {
-      return res.status(403).json({ message: "Token inválido o expirado", error: err });
+      console.error("Error verificando el token:", err.message);
+      return res.sendStatus(403); // Token inválido
     }
 
-    if (decoded) {
-      (req as CustomRequest).payload = decoded as Payload; 
+    if (user) {
+      (req as CustomRequest).payload = user as Payload;
       next();
     } else {
-      res.status(500).json({ message: "Error interno en la verificación del token" });
+      console.error("Usuario no definido después de verificar el token.");
+      return res.sendStatus(500); // Error inesperado
     }
   });
 };

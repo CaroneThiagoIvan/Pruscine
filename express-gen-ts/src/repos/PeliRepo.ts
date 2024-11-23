@@ -49,18 +49,8 @@ async function getAll(): Promise<IPelicula[]> {
   }
 }
 
-async function add(pelicula: IPelicula, token: string): Promise<string | void> {
+async function add(pelicula: IPelicula): Promise<string | void> {
   try {
-    const decodedToken = jwt.verify(token, "prusci") as {
-      mail: string;
-      contraseña: string;
-      rol: boolean;
-    };
-
-    // Verificar si el rol es válido
-    if (!decodedToken.rol) {
-      throw new Error('No tienes permiso para realizar esta acción.');
-    }
 
     await Pelicula.create({
       nombre: pelicula.nombre,

@@ -27,10 +27,10 @@ async function getOne(id :number): Promise<IPelicula | null> {
 /**
  * Add one user.
  */
-async function addOne(pelicula: IPelicula, token: string): Promise<string | void> {
+async function addOne(pelicula: IPelicula): Promise<string | void> {
   try {
     console.log(pelicula);
-    return await PeliRepo.add(pelicula, token); 
+    return await PeliRepo.add(pelicula); 
   } catch (err) {
     console.error('Error in addOne:', err);
     throw err; 

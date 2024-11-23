@@ -7,6 +7,7 @@ import ExplorarRoutes from './ExplorarRoutes';
 import AuthRoutes from './AuthRoutes';
 import { authenticateToken } from '@src/middleware/validateToken';
 import PeliculaRoutes from './PeliculaRoutes';
+import { checkUserRole } from '@src/middleware/checkUser';
 
 
 // **** Variables **** //
@@ -101,50 +102,24 @@ PeliRepo.get(
   PeliculaRoutes.getAll,
 );
 
-// Extend the Request interface to include the payload property
-interface CustomRequest extends Request {
-  payload?: { rol: boolean };
-}
-
 PeliRepo.post(
   Paths.Pelicula.Add,
   authenticateToken, // Verificación del token
-  (req: CustomRequest, res, next) => {
-    // Verifica si el usuario tiene el rol de administrador (rol: true)
-    if (req.payload?.rol) {
-      return next(); // Si es admin, continúa a la ruta
-    } else {
-      return res.status(403).json({ message: 'Acceso denegado, no eres administrador.' });
-    }
-  },
+  checkUserRole,
   PeliculaRoutes.add,
 );
 
 PeliRepo.put(
   Paths.Pelicula.Update,
   authenticateToken, // Verificación del token
-  (req: CustomRequest, res, next) => {
-    // Verifica si el usuario tiene el rol de administrador (rol: true)
-    if (req.payload?.rol === true) {
-      return next(); // Si es admin, continúa a la ruta
-    } else {
-      return res.status(403).json({ message: 'Acceso denegado, no eres administrador.' });
-    }
-  },
+  checkUserRole, // Verificación del rol
   PeliculaRoutes.update,
 );
 
 PeliRepo.delete(
   Paths.Pelicula.Delete,
   authenticateToken, // Verificación del token
-  (req: CustomRequest, res, next) => {
-    // Verifica si el usuario tiene el rol de administrador (rol: true)
-    if (req.payload?.rol === true) {
-      return next(); // Si es admin, continúa a la ruta
-    } else {
-      return res.status(403).json({ message: 'Acceso denegado, no eres administrador.' });
-    }
-  },
+  checkUserRole,
   PeliculaRoutes.delete,
 );
 

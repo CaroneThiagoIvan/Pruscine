@@ -25,10 +25,10 @@ async function getAll(_: IReq, res: IRes) {
 /**
  * Add one user.
  */
-async function add(req: IReq<{pelicula: IPelicula, token: string}>, res: IRes) {
+async function add(req: IReq<{pelicula: IPelicula}>, res: IRes) {
   console.log(req.body)
-  const { pelicula, token } = req.body;
-  await PeliculaService.addOne(pelicula, token);
+  const { pelicula } = req.body;
+  await PeliculaService.addOne(pelicula);
   return res.status(HttpStatusCodes.CREATED).end();
 }
 
