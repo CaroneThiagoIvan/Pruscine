@@ -2,6 +2,8 @@
  * Express router paths go here.
  */
 
+import Director from "@src/models/director.model";
+import Genero from "@src/models/genero.model";
 import { getOptionSections } from "ts-command-line-args";
 
 
@@ -45,6 +47,30 @@ export default {
   },
   Lista: {
     Base: '/lista',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  Actor: {
+    Base: '/actor',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  Director: {
+    Base: '/director',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  Genero: {
+    Base: '/genero',
     Get: '/',
     GetOne: '/:id',
     Add: '/',
