@@ -34,7 +34,10 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-
+      - name: Create production.env file
+        run: |
+          echo "${{ secrets.PRODUCTION }}" > ./env/production.env
+        
       - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v2
