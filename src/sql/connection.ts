@@ -19,7 +19,7 @@ const sequelize = new Sequelize({
   database: 'prucine',
   dialect: 'mysql',
   username: 'root',
-  password: 'Cuker33632005',
+  password: 'root',
   host: 'localhost',
   port: 3306,
   logging: console.log,

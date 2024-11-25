@@ -25,8 +25,9 @@ async function getAll(_: IReq, res: IRes) {
 /**
  * Add one genero.
  */
-async function add(req: IReq<{ genero: IGenero }>, res: IRes) {
-  const { genero } = req.body;
+async function add(req: IReq<IGenero>, res: IRes) {
+  const genero = req.body;
+  console.log("cuarto log: " + JSON.stringify(genero));
   await GeneroService.add(genero);
   return res.status(HttpStatusCodes.CREATED).end();
 }

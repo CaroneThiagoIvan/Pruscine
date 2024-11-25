@@ -14,6 +14,7 @@ export interface CustomRequest extends IReq {
 export const authenticateToken = (req: IReq, res: IRes, next: INext) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : null;
+  console.log("el token es: " + token);
 
   if (!token) {
     console.error("No se encontró un token en el encabezado.");
