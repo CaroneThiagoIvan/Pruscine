@@ -25,5 +25,8 @@ jobs:
       - name: Npm Install
         run: npm install
 
+      - name:  Install Express
+        run: npm install express --save
+
       - name: Run Tests
         run: npm test
