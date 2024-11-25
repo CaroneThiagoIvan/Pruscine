@@ -12,9 +12,11 @@ import PeliculaGenero from '@src/models/peliculaGenero.model';
 import Resena from '@src/models/resena.model';
 import Usuario from '@src/models/user.model';
 import { Sequelize } from 'sequelize-typescript';
-
+import dotenv from 'dotenv';  
 
 // Initialize Sequelize
+dotenv.config({ path: './env/production.env' });
+
 const sequelize = new Sequelize({
   database: 'prucine',
   dialect: 'mysql',

@@ -5,6 +5,7 @@ import  Actor  from './actor.model';
 import  Director  from './director.model';
 //import  User  from './user.model';
 import  Resena  from './resena.model';
+import User from './user.model';
 
 
 
