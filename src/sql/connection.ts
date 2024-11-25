@@ -12,15 +12,17 @@ import PeliculaGenero from '@src/models/peliculaGenero.model';
 import Resena from '@src/models/resena.model';
 import Usuario from '@src/models/user.model';
 import { Sequelize } from 'sequelize-typescript';
-
+import dotenv from 'dotenv';  
 
 // Initialize Sequelize
+dotenv.config({ path: './env/production.env' });
+
 const sequelize = new Sequelize({
   database: 'prucine',
   dialect: 'mysql',
-  username: 'root',
-  password: 'Cuker33632005',
-  host: 'localhost',
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  host: process.env.HOST,
   port: 3306,
   logging: console.log,
   models: [Actor, Director, FavoritoP, FavoritoR, Genero, Lista, Pais, Pelicula, PeliculaActor, PeliculaDirector, PeliculaGenero, Resena, Usuario], // Include MascotaVacuna model here
