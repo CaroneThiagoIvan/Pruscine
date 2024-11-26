@@ -1,5 +1,4 @@
 import { Table, Column, Model, ForeignKey, DataType, PrimaryKey, HasMany } from 'sequelize-typescript';
-import Pais from './pais.model';
 import Genero from './genero.model';
 import Actor from './actor.model';
 import Director from './director.model';
@@ -22,9 +21,8 @@ class Pelicula extends Model {
   @Column(DataType.DATE)
   anioPublicado!: Date;
 
-  @ForeignKey(() => Pais)
-  @Column
-  paisIdpais!: number;
+  @Column(DataType.STRING)
+  pais!: String;
 
   @ForeignKey(() => Genero)
   @Column

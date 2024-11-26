@@ -4,7 +4,6 @@ import FavoritoP from '@src/models/favoritoP.model';
 import FavoritoR from '@src/models/favoritoR.model';
 import Genero from '@src/models/genero.model';
 import Lista from '@src/models/lista.model';
-import Pais from '@src/models/pais.model';
 import Pelicula from '@src/models/pelicula.model';
 import PeliculaActor from '@src/models/peliculaActor.model';
 import PeliculaDirector from '@src/models/peliculaDirector.model';
@@ -25,7 +24,7 @@ const sequelize = new Sequelize({
   host: 'localhost',
   port: 3306,
   logging: console.log,
-  models: [Actor, Director, FavoritoP, FavoritoR, Genero, Lista, Pais, Pelicula, PeliculaActor, PeliculaDirector, PeliculaGenero, Resena, Usuario], // Include MascotaVacuna model here
+  models: [Actor, Director, FavoritoP, FavoritoR, Genero, Lista, Pelicula, PeliculaActor, PeliculaDirector, PeliculaGenero, Resena, Usuario], // Include MascotaVacuna model here
 });
 
 // Authenticate the connection

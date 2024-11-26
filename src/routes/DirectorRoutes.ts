@@ -19,14 +19,14 @@ async function getOne(req: IReq, res: IRes) {
  */
 async function getAll(_: IReq, res: IRes) {
   const directors = await DirectorService.getAll();
-  return res.status(HttpStatusCodes.OK).json({ directors });
+  return res.status(HttpStatusCodes.OK).json( directors );
 }
 
 /**
  * Add one director.
  */
-async function add(req: IReq<{ director: IDirector }>, res: IRes) {
-  const { director } = req.body;
+async function add(req: IReq<IDirector>, res: IRes) {
+  const director = req.body;
   await DirectorService.add(director);
   return res.status(HttpStatusCodes.CREATED).end();
 }

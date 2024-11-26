@@ -47,16 +47,17 @@ async function getAll(): Promise<IActor[]> {
 /**
  * Add new actor.
  */
-async function add(actor: IActor): Promise<string | void> {
+async function add(actor: any): Promise<string | void> {
   try {
+    console.log("quinto log: " + JSON.stringify(actor));
     await Actor.create({
-      nombre: actor.nombre,
-      fechaNacimiento: actor.fechaNacimiento,
-      descripcion: actor.descripcion
+      nombre: actor.actor.nombre,
+      fechaNacimiento: actor.actor.fechaNacimiento,
+      descripcion: actor.actor.descripcion,
     });
     return 'Actor creado con éxito';
   } catch (error) {
-    console.error('Error adding actor:', error);
+    console.error('Error adding Actor:', error);
     throw error;
   }
 }

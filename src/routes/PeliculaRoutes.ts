@@ -19,15 +19,15 @@ async function getOne(req: IReq, res: IRes) {
 
 async function getAll(_: IReq, res: IRes) {
   const peliculas = await PeliculaService.getAll();
-  return res.status(HttpStatusCodes.OK).json({ peliculas });
+  return res.status(HttpStatusCodes.OK).json( peliculas );
 }
 
 /**
  * Add one user.
  */
-async function add(req: IReq<{pelicula: IPelicula}>, res: IRes) {
+async function add(req: IReq<IPelicula>, res: IRes) {
   console.log(req.body)
-  const { pelicula } = req.body;
+  const pelicula = req.body;
   await PeliculaService.addOne(pelicula);
   return res.status(HttpStatusCodes.CREATED).end();
 }

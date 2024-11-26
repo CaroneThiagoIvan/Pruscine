@@ -19,14 +19,14 @@ async function getOne(req: IReq, res: IRes) {
  */
 async function getAll(_: IReq, res: IRes) {
   const actors = await ActorService.getAll();
-  return res.status(HttpStatusCodes.OK).json({ actors });
+  return res.status(HttpStatusCodes.OK).json( actors );
 }
 
 /**
  * Add one actor.
  */
-async function add(req: IReq<{ actor: IActor }>, res: IRes) {
-  const { actor } = req.body;
+async function add(req: IReq<IActor>, res: IRes) {
+  const actor = req.body;
   await ActorService.add(actor);
   return res.status(HttpStatusCodes.CREATED).end();
 }

@@ -19,7 +19,7 @@ async function getOne(req: IReq, res: IRes) {
  */
 async function getAll(_: IReq, res: IRes) {
   const generos = await GeneroService.getAll();
-  return res.status(HttpStatusCodes.OK).json({ generos });
+  return res.status(HttpStatusCodes.OK).json( generos );
 }
 
 /**

@@ -57,7 +57,8 @@ async function add(pelicula: IPelicula): Promise<string | void> {
       anioPublicado: pelicula.anioPublicado,
       generoIDgenero: pelicula.genero_idgenero,
       peliculaIDactor: pelicula.pelicula_idactor,
-      peliculaIDdirector: pelicula.pelicula_iddirector
+      peliculaIDdirector: pelicula.pelicula_iddirector,
+      pais: pelicula.pais
     });
 
     return 'Pelicula creada con éxito';
