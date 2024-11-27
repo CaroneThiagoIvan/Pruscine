@@ -46,9 +46,13 @@ async function update(req: IReq<IResena>, res: IRes) {
 /**
  * Delete one user.
  */
-async function delete_(req: IReq, res: IRes) {
-  const usuario_idusuario = +req.params.usuario_idusuario;
-  const pelicula_idpelicula = +req.params.pelicula_idpelicula;
+async function delete_(req: IReq<{id_usuario: number, id_pelicula: number}>, res: IRes) {
+  console.log("body");
+  console.log(req.body);
+  const usuario_idusuario = +req.body.id_usuario;
+  const pelicula_idpelicula = +req.body.id_pelicula;
+  console.log("routes");
+  console.log(usuario_idusuario,pelicula_idpelicula)
   await ResenaService.delete(usuario_idusuario,pelicula_idpelicula);
   return res.status(HttpStatusCodes.OK).end();
 }

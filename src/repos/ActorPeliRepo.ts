@@ -9,7 +9,6 @@ async function getAll(id: number): Promise<IPeliculaActor[]> {
           peliculaIdpelicula: id,
         }
       });
-      console.log("cacona grande");
       return result.map((ids: { toJSON: () => IPeliculaActor; }) => ids.toJSON() as IPeliculaActor);
     } 
     catch (error) {

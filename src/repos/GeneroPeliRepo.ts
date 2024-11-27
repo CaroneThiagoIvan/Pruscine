@@ -9,7 +9,7 @@ async function getAll(id: number): Promise<IPeliculaGenero[]> {
           peliculaIdpelicula: id,
         }
       });
-      console.log("cacona chica");
+      
       return result.map((ids: { toJSON: () => IPeliculaGenero; }) => ids.toJSON() as IPeliculaGenero);
     } 
     catch (error) {

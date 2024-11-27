@@ -9,7 +9,7 @@ async function getAll(id: number): Promise<IPeliculaDirector[]> {
           peliculaIdpelicula: id,
         }
       });
-      console.log("cacona gigante");
+      
       return result.map((ids: { toJSON: () => IPeliculaDirector; }) => ids.toJSON() as IPeliculaDirector);
     } 
     catch (error) {
