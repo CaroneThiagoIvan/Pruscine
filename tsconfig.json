@@ -77,7 +77,7 @@
     "src/**/*.ts",
     "spec/**/*.ts",
     "build.ts"
-  ],
+, "src/services/GeneroPeliService.ts"  ],
   "exclude": [
     "src/public/"
   ]

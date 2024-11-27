@@ -32,7 +32,6 @@ sequelize.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
 
-    // Sync all models including MascotaVacuna
     return sequelize.sync({ alter: true });
   })
   .then(() => {

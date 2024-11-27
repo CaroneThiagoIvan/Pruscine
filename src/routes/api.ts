@@ -15,6 +15,7 @@ import Genero from '@src/models/genero.model';
 import ActorRoutes from './ActorRoutes';
 import DirectorRoutes from './DirectorRoutes';
 import GeneroRoutes from './GeneroRoutes';
+import GeneroPeliRoutes from './GeneroPeliRoutes';
 
 
 
@@ -34,6 +35,9 @@ const ListaRepo = Router();
 const ActorRepo = Router();
 const DirectorRepo = Router();
 const GeneroRepo = Router();
+const GeneroPeliRepo = Router();
+const ActorPeliRepo = Router();
+const DirectorPeliRepo = Router();
 
 UserRouter.get(
   Paths.Users.Get,
@@ -109,9 +113,29 @@ AuthRepo.post(
   AuthRoutes.login,
 );
 
+GeneroPeliRepo.get(
+  Paths.PeliculaGenero.GetOne,
+  GeneroPeliRoutes.getAll,
+);
+
+ActorPeliRepo.get(
+  Paths.PeliculaActor.Get,
+
+);
+
+DirectorPeliRepo.get(
+  Paths.PeliculaDirector.Get,
+
+);
+
 PeliRepo.get(
   Paths.Pelicula.Get,
   PeliculaRoutes.getAll,
+);
+
+PeliRepo.get(
+  Paths.Pelicula.GetOne,
+  PeliculaRoutes.getOne,	
 );
 
 PeliRepo.post(
@@ -259,6 +283,9 @@ apiRouter.use(Paths.Lista.Base, ListaRepo);
 apiRouter.use(Paths.Actor.Base, ActorRepo);
 apiRouter.use(Paths.Director.Base, DirectorRepo);
 apiRouter.use(Paths.Genero.Base, GeneroRepo);
+apiRouter.use(Paths.PeliculaGenero.Base, GeneroPeliRepo);
+apiRouter.use(Paths.PeliculaActor.Base, ActorPeliRepo);
+apiRouter.use(Paths.PeliculaDirector.Base, DirectorPeliRepo);
 
 // **** Export default **** //
 

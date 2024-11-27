@@ -14,9 +14,9 @@ export interface IPelicula {
   nombre: string;
   anioPublicado: Date;
   pais: string;
-  genero_idgenero: number;
-  pelicula_idactor: number;
-  pelicula_iddirector: number;
+  generos: number[];
+  actores: number[];
+  directores: number[];
 }
 
 

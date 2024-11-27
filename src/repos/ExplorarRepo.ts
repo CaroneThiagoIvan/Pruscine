@@ -53,9 +53,6 @@ async function add(pelicula: IPelicula): Promise<string | void> {
         nombre: pelicula.nombre,
         anioPublicado: pelicula.anioPublicado,
         pais: pelicula.pais,
-        generoIdgenero: pelicula.genero_idgenero,
-        peliculaIdactor: pelicula.pelicula_idactor,
-        peliculaIddirector: pelicula.pelicula_iddirector
       });
     } catch (error) {
       console.error("Error adding pelicula:", error);
