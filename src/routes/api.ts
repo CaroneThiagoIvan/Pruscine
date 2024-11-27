@@ -9,13 +9,13 @@ import { authenticateToken } from '@src/middleware/validateToken';
 import PeliculaRoutes from './PeliculaRoutes';
 import { checkUserRole } from '@src/middleware/checkUser';  
 import ListaRoutes from './ListaRoutes';
-import Actor from '@src/models/actor.model';
-import Director from '@src/models/director.model';
-import Genero from '@src/models/genero.model';
 import ActorRoutes from './ActorRoutes';
 import DirectorRoutes from './DirectorRoutes';
 import GeneroRoutes from './GeneroRoutes';
-
+import GeneroPeliRoutes from './GeneroPeliRoutes';
+import ActorPeliRoutes from './ActorPeliRoutes';
+import DirectorPeliRoutes from './DirectorPeliRoutes';
+import ResenaRoutes from './ResenaRoutes';
 
 
 // **** Variables **** //
@@ -34,14 +34,20 @@ const ListaRepo = Router();
 const ActorRepo = Router();
 const DirectorRepo = Router();
 const GeneroRepo = Router();
+const GeneroPeliRepo = Router();
+const ActorPeliRepo = Router();
+const DirectorPeliRepo = Router();
 
 UserRouter.get(
   Paths.Users.Get,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   UserRoutes.getAll,
 );
 
 UserRouter.get(
   Paths.Users.GetOne,
+  authenticateToken, // Verificación del token
   UserRoutes.getOne,
 );
 
@@ -61,6 +67,7 @@ UserRouter.put(
 // Delete one user
 UserRouter.delete(
   Paths.Users.Delete,
+  authenticateToken, // Verificación del token
   UserRoutes.delete,
 );
 
@@ -85,23 +92,27 @@ ExplorarRepo.delete(
 );
 
 ResenaRepo.get(
-  Paths.Resena.Get,
-  ExplorarRoutes.getAll,
+  Paths.Resena.GetOne,
+  authenticateToken,
+  ResenaRoutes.getAll,
 );
 
 ResenaRepo.post(
   Paths.Resena.Add,
-  ExplorarRoutes.add,
+  authenticateToken, // Verificación del token
+  ResenaRoutes.add,
 );
 
 ResenaRepo.put(
   Paths.Resena.Update,
-  ExplorarRoutes.update,
+  ResenaRoutes.update,
 );
 
 ResenaRepo.delete(
   Paths.Resena.Delete,
-  ExplorarRoutes.delete,
+  authenticateToken, // Verificación del token
+  checkUserRole,
+  ResenaRoutes.delete,
 );
 
 AuthRepo.post(
@@ -109,9 +120,29 @@ AuthRepo.post(
   AuthRoutes.login,
 );
 
+GeneroPeliRepo.get(
+  Paths.PeliculaGenero.GetOne,
+  GeneroPeliRoutes.getAll,
+);
+
+ActorPeliRepo.get(
+  Paths.PeliculaActor.GetOne,
+  ActorPeliRoutes.getAll,
+);
+
+DirectorPeliRepo.get(
+  Paths.PeliculaDirector.GetOne,
+  DirectorPeliRoutes.getAll,
+);
+
 PeliRepo.get(
   Paths.Pelicula.Get,
   PeliculaRoutes.getAll,
+);
+
+PeliRepo.get(
+  Paths.Pelicula.GetOne,
+  PeliculaRoutes.getOne,	
 );
 
 PeliRepo.post(
@@ -167,16 +198,22 @@ ActorRepo.get(
 
 ActorRepo.post(
   Paths.Actor.Add,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   ActorRoutes.add,
 );
 
 ActorRepo.put(
   Paths.Actor.Update,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   ActorRoutes.update,
 );
 
 ActorRepo.delete(
   Paths.Actor.Delete,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   ActorRoutes.delete,
 );
 
@@ -192,16 +229,22 @@ DirectorRepo.get(
 
 DirectorRepo.post(
   Paths.Director.Add,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   DirectorRoutes.add,
 );
 
 DirectorRepo.put(
   Paths.Director.Update,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   DirectorRoutes.update,
 );
 
 DirectorRepo.delete(
   Paths.Director.Delete,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   DirectorRoutes.delete,
 );
 
@@ -217,16 +260,22 @@ GeneroRepo.get(
 
 GeneroRepo.post(
   Paths.Genero.Add,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   GeneroRoutes.add,
 );
 
 GeneroRepo.put(
   Paths.Genero.Update,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   GeneroRoutes.update,
 );
 
 GeneroRepo.delete(
   Paths.Genero.Delete,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   GeneroRoutes.delete,
 );
 
@@ -241,6 +290,9 @@ apiRouter.use(Paths.Lista.Base, ListaRepo);
 apiRouter.use(Paths.Actor.Base, ActorRepo);
 apiRouter.use(Paths.Director.Base, DirectorRepo);
 apiRouter.use(Paths.Genero.Base, GeneroRepo);
+apiRouter.use(Paths.PeliculaGenero.Base, GeneroPeliRepo);
+apiRouter.use(Paths.PeliculaActor.Base, ActorPeliRepo);
+apiRouter.use(Paths.PeliculaDirector.Base, DirectorPeliRepo);
 
 // **** Export default **** //
 

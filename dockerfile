@@ -2,7 +2,7 @@ FROM node:latest AS builder
 
 WORKDIR /app
 
-COPY ./package*.json ./
+COPY ./package.json ./
 
 RUN npm install
 
@@ -20,7 +20,7 @@ COPY --from=builder /app/env/production.env ./env/production.env
 
 COPY --from=builder /app/dist ./dist
 
-COPY ./package*.json ./
+COPY ./package.json ./
 
 RUN npm install 
 

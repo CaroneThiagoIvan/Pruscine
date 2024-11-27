@@ -12,16 +12,19 @@ class Resena extends Model {
   @Column({
     primaryKey: true,
   })
-  usuarioIdusuario!: number;
+  usuario_idusuario!: number;
 
   @ForeignKey(() => Pelicula)
   @Column({
     primaryKey: true,
   })
-  peliculaIdpelicula!: number;
+  pelicula_idpelicula!: number;
 
   @Column(DataType.STRING)
   descripcion!: string;
+
+  @Column(DataType.INTEGER)
+  calificacion!: number;
 }
 
 export default Resena;

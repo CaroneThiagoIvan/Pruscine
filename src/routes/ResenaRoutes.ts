@@ -10,9 +10,10 @@ import ResenaService from '@src/services/ResenaService';
 /**
  * Get all users.
  */
-async function getAll(_: IReq, res: IRes) {
-    const resena = await ResenaService.getAll();
-    return res.status(HttpStatusCodes.OK).json({ resena });
+async function getAll(req: IReq, res: IRes) {
+  const id = +req.params.id;
+  const resena = await ResenaService.getAll(id);
+  return res.status(HttpStatusCodes.OK).json(resena);
 }
 
 async function getOne(req: IReq, res: IRes) {
@@ -27,6 +28,8 @@ async function getOne(req: IReq, res: IRes) {
  */
 async function add(req: IReq<IResena>, res: IRes) {
   const resena = req.body;
+  console.log("alo");
+  console.log(resena);
   await ResenaService.addOne(resena);
   return res.status(HttpStatusCodes.CREATED).end();
 }
