@@ -11,18 +11,18 @@ import PeliculaGenero from '@src/models/peliculaGenero.model';
 import Resena from '@src/models/resena.model';
 import Usuario from '@src/models/user.model';
 import { Sequelize } from 'sequelize-typescript';
-import dotenv from 'dotenv';  
+import dotenv from 'dotenv';
 
-// Initialize Sequelize
-dotenv.config({ path: './env/production.env' });
+dotenv.config();
+
 
 const sequelize = new Sequelize({
-  database: 'prucine',
+  database: process.env.DB_NAME,
   dialect: 'mysql',
-  username: 'root',
-  password: 'root',
-  host: 'localhost',
-  port: 3306,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: parseInt(process.env.DB_PORT as string),
   logging: console.log,
   models: [Actor, Director, FavoritoP, FavoritoR, Genero, Lista, Pelicula, PeliculaActor, PeliculaDirector, PeliculaGenero, Resena, Usuario], // Include MascotaVacuna model here
 });
@@ -32,6 +32,7 @@ sequelize.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
 
+    // Sync all models including MascotaVacuna
     return sequelize.sync({ alter: true });
   })
   .then(() => {
