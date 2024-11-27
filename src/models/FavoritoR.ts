@@ -1,9 +1,6 @@
 import moment from 'moment';
-
 import { DataTypes } from 'sequelize';
 import { table } from 'console';
-import { IUser } from './User';
-import { IResena } from './Resena';
 
 
 // **** Variables **** //
