@@ -41,7 +41,6 @@ const DirectorPeliRepo = Router();
 UserRouter.get(
   Paths.Users.Get,
   authenticateToken, // Verificación del token
-  checkUserRole,
   UserRoutes.getAll,
 );
 
@@ -93,7 +92,6 @@ ExplorarRepo.delete(
 
 ResenaRepo.get(
   Paths.Resena.GetOne,
-  authenticateToken,
   ResenaRoutes.getAll,
 );
 
@@ -111,7 +109,6 @@ ResenaRepo.put(
 ResenaRepo.delete(
   Paths.Resena.Delete,
   authenticateToken, // Verificación del token
-  checkUserRole,
   ResenaRoutes.delete,
 );
 
