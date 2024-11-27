@@ -3,6 +3,7 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
 import ResenaRepo from '@src/repos/ResenaRepo';
 import { IResena } from '@src/models/Resena';
+import { IRes } from '@src/routes/types/express/misc';
 
 
 // **** Variables **** //
@@ -15,8 +16,8 @@ export const RESENA_NOT_FOUND_ERR = 'Resena not found';
 /**
  * Get all users.
  */
-function getAll(): Promise<IResena[]> {
-  return ResenaRepo.getAll();
+async function getAll(id: number): Promise<IResena[]> {
+  return ResenaRepo.getAll(id);
 }
 
 async function getOne(usuario_idusuario: number, pelicula_idpelicula: number): Promise<IResena | null> {

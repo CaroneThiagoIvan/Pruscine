@@ -32,17 +32,22 @@ async function persists(usuario_idusuario: number, pelicula_idpelicula: number):
   });
 }
 
-async function getAll(): Promise<IResena[]> {
-  try {
-    
-    const resenas = await Resena.findAll();
-    return resenas.map((resena: { toJSON: () => IResena; }) => resena.toJSON() as IResena);
+async function getAll(id: number): Promise<IResena[]> {
 
-  } catch (error) {
-    console.error("Error retrieving resena:", error);
-    return []; 
+  try {
+    const result = await Resena.findAll({
+      where: {
+        pelicula_idpelicula: id,
+      }
+    });
+    console.log("cacona chica");
+    return result.map((ids: { toJSON: () => IResena; }) => ids.toJSON() as IResena);
+  } 
+  catch (error) {
+      console.error("Error retrieving generos:", error);
+      return []; 
   }
-}
+};
 
 async function add(resena: IResena): Promise<string | void> {
     try {

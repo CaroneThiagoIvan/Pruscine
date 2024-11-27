@@ -92,7 +92,7 @@ ExplorarRepo.delete(
 );
 
 ResenaRepo.get(
-  Paths.Resena.Get,
+  Paths.Resena.GetOne,
   authenticateToken,
   ResenaRoutes.getAll,
 );
