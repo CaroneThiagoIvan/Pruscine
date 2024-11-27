@@ -27,6 +27,8 @@ async function getOne(req: IReq, res: IRes) {
  */
 async function add(req: IReq<IResena>, res: IRes) {
   const resena = req.body;
+  console.log("alo");
+  console.log(resena);
   await ResenaService.addOne(resena);
   return res.status(HttpStatusCodes.CREATED).end();
 }

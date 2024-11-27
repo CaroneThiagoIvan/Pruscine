@@ -12,10 +12,10 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 // **** Types **** //
 
 export interface IResena {
-  usuario_idusuario: number;
-  pelicula_idpelicula: number;
-  descripcion: string;
-  calificacion: number;
+  idusuario: number;
+  movie: number;
+  description: string;
+  rating: number;
 }
 
 

@@ -44,27 +44,38 @@ async function getAll(): Promise<IResena[]> {
   }
 }
 
-async function add(resena: IResena): Promise<void> {
+async function add(resena: IResena): Promise<string | void> {
     try {
+      console.log("skibidi resena");
+      console.log(resena);
+
+      console.log(resena.description);
+      console.log(resena.rating);
+      console.log(resena.idusuario);
+      console.log(resena.movie);
+
       await Resena.create({
-        usuario_idusuario: resena.usuario_idusuario,
-        pelicula_idpelicula: resena.pelicula_idpelicula,
+        descripcion: resena.description,
+        calificacion: resena.rating,
+        usuario_idusuario: resena.idusuario,
+        pelicula_idpelicula: resena.movie
       });
-  
+
+      return "Pelicula creada con éxito";
     } catch (error) {
       console.error("Error adding resena:", error);
-  
+      throw error;
     }
   }
 
 
 async function update(resena: IResena): Promise<void> {
   try {
-
+    
     await Resena.update(resena, {
       where: {
-        usuario_idusuario: resena.usuario_idusuario,
-        pelicula_idpelicula: resena.pelicula_idpelicula
+        usuario_idusuario: resena.idusuario,
+        pelicula_idpelicula: resena.movie
       }
     });
 

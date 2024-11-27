@@ -25,15 +25,22 @@ async function getOne(usuario_idusuario: number, pelicula_idpelicula: number): P
 /**
  * Add one user.
  */
-function addOne(resena: IResena): Promise<void> {
-  return ResenaRepo.add(resena);
+async function addOne(resena: IResena): Promise<string | void> {
+  try {
+    console.log("reseña service");
+    console.log(resena);
+    return await ResenaRepo.add(resena); 
+  } catch (err) {
+    console.error('Error in addOne:', err);
+    throw err; 
+  }
 }
 
 /**
  * Update one user.
  */
 async function updateOne(resena: IResena): Promise<void> {
-  const persists = await ResenaRepo.persists(resena.usuario_idusuario,resena.pelicula_idpelicula);
+  const persists = await ResenaRepo.persists(resena.idusuario,resena.movie);
   if (!persists) {
     throw new RouteError(
       HttpStatusCodes.NOT_FOUND,
