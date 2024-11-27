@@ -99,26 +99,6 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `favoritoR`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `favoritoR` (
-  `usuario_idusuario` int NOT NULL,
-  `resena_usuario_idusuario` int NOT NULL,
-  `resena_pelicula_idpelicula` int NOT NULL,
-  PRIMARY KEY (`usuario_idusuario`,`resena_usuario_idusuario`,`resena_pelicula_idpelicula`),
-  KEY `fk_usuario_has_resena_resena1_idx` (`resena_usuario_idusuario`,`resena_pelicula_idpelicula`),
-  KEY `fk_usuario_has_resena_usuario1_idx` (`usuario_idusuario`),
-  CONSTRAINT `fk_usuario_has_resena_resena1` FOREIGN KEY (`resena_usuario_idusuario`, `resena_pelicula_idpelicula`) REFERENCES `resena` (`usuario_idusuario`, `pelicula_idpelicula`),
-  CONSTRAINT `fk_usuario_has_resena_usuario1` FOREIGN KEY (`usuario_idusuario`) REFERENCES `usuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `favoritoR`
---
-
-LOCK TABLES `favoritoR` WRITE;
-/*!40000 ALTER TABLE `favoritoR` DISABLE KEYS */;
-/*!40000 ALTER TABLE `favoritoR` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `genero`
@@ -312,6 +292,7 @@ CREATE TABLE `resena` (
   `usuario_idusuario` int NOT NULL,
   `pelicula_idpelicula` int NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
+  `calificacion` int DEFAULT NULL,	
   PRIMARY KEY (`usuario_idusuario`,`pelicula_idpelicula`),
   KEY `fk_usuario_has_pelicula_pelicula1_idx` (`pelicula_idpelicula`),
   KEY `fk_usuario_has_pelicula_usuario_idx` (`usuario_idusuario`),

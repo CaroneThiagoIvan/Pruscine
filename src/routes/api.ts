@@ -9,14 +9,13 @@ import { authenticateToken } from '@src/middleware/validateToken';
 import PeliculaRoutes from './PeliculaRoutes';
 import { checkUserRole } from '@src/middleware/checkUser';  
 import ListaRoutes from './ListaRoutes';
-import Actor from '@src/models/actor.model';
-import Director from '@src/models/director.model';
-import Genero from '@src/models/genero.model';
 import ActorRoutes from './ActorRoutes';
 import DirectorRoutes from './DirectorRoutes';
 import GeneroRoutes from './GeneroRoutes';
 import GeneroPeliRoutes from './GeneroPeliRoutes';
-
+import ActorPeliRoutes from './ActorPeliRoutes';
+import DirectorPeliRoutes from './DirectorPeliRoutes';
+import ResenaRoutes from './ResenaRoutes';
 
 
 // **** Variables **** //
@@ -41,11 +40,14 @@ const DirectorPeliRepo = Router();
 
 UserRouter.get(
   Paths.Users.Get,
+  authenticateToken, // Verificación del token
+  checkUserRole,
   UserRoutes.getAll,
 );
 
 UserRouter.get(
   Paths.Users.GetOne,
+  authenticateToken, // Verificación del token
   UserRoutes.getOne,
 );
 
@@ -65,6 +67,7 @@ UserRouter.put(
 // Delete one user
 UserRouter.delete(
   Paths.Users.Delete,
+  authenticateToken, // Verificación del token
   UserRoutes.delete,
 );
 
@@ -90,22 +93,26 @@ ExplorarRepo.delete(
 
 ResenaRepo.get(
   Paths.Resena.Get,
-  ExplorarRoutes.getAll,
+  authenticateToken,
+  ResenaRoutes.getAll,
 );
 
 ResenaRepo.post(
   Paths.Resena.Add,
-  ExplorarRoutes.add,
+  authenticateToken, // Verificación del token
+  ResenaRoutes.add,
 );
 
 ResenaRepo.put(
   Paths.Resena.Update,
-  ExplorarRoutes.update,
+  ResenaRoutes.update,
 );
 
 ResenaRepo.delete(
   Paths.Resena.Delete,
-  ExplorarRoutes.delete,
+  authenticateToken, // Verificación del token
+  checkUserRole,
+  ResenaRoutes.delete,
 );
 
 AuthRepo.post(
@@ -119,13 +126,13 @@ GeneroPeliRepo.get(
 );
 
 ActorPeliRepo.get(
-  Paths.PeliculaActor.Get,
-
+  Paths.PeliculaActor.GetOne,
+  ActorPeliRoutes.getAll,
 );
 
 DirectorPeliRepo.get(
-  Paths.PeliculaDirector.Get,
-
+  Paths.PeliculaDirector.GetOne,
+  DirectorPeliRoutes.getAll,
 );
 
 PeliRepo.get(

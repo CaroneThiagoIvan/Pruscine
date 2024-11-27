@@ -9,10 +9,8 @@ async function getAll(id: number): Promise<IPeliculaGenero[]> {
           peliculaIdpelicula: id,
         }
       });
-      console.log("cacona grande");
-      const result2 = result.map((ids: { toJSON: () => IPeliculaGenero; }) => ids.toJSON() as IPeliculaGenero)
-      console.log(result2);
-      return result2;
+      console.log("cacona chica");
+      return result.map((ids: { toJSON: () => IPeliculaGenero; }) => ids.toJSON() as IPeliculaGenero);
     } 
     catch (error) {
         console.error("Error retrieving generos:", error);

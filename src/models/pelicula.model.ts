@@ -24,17 +24,6 @@ class Pelicula extends Model {
   @Column(DataType.STRING)
   pais!: String;
 
-  @ForeignKey(() => Genero)
-  @Column
-  generoIdgenero!: number;
-
-  @ForeignKey(() => Actor)
-  @Column
-  peliculaIdactor!: number;
-
-  @ForeignKey(() => Director)
-  @Column
-  peliculaIddirector!: number;
 }
 
 export default Pelicula;

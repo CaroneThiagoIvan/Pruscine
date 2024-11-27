@@ -84,7 +84,7 @@ async function add(pelicula: IPelicula): Promise<string | void> {
       const element = pelicula.directores[i];
       await PeliculaDirector.create({
         peliculaIdpelicula: nuevaPelicula.idpelicula,
-        generoIdgenero: element
+        directorIddirector: element
       });
     }
     

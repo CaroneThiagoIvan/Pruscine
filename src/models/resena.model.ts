@@ -22,6 +22,9 @@ class Resena extends Model {
 
   @Column(DataType.STRING)
   descripcion!: string;
+
+  @Column(DataType.INTEGER)
+  calificacion!: number;
 }
 
 export default Resena;
