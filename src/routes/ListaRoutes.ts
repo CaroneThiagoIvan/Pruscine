@@ -11,16 +11,14 @@ import { IReq, IRes } from './types/express/misc';
 async function getOne(req: IReq, res: IRes) {
   const { usuario_idusuario, nombre } = req.params;
   const lista = await ListaService.getOne(+usuario_idusuario, nombre);
-  return res.status(HttpStatusCodes.OK).json(lista);
+  return res.status(HttpStatusCodes.OK).json({lista});
 }
 
 /**
  * Get all listas for a user.
  */
 async function getAll(req: IReq, res: IRes) {
-  const { usuario_idusuario } = req.params;
-  const { nombre } = req.params;
-  const listas = await ListaService.getAll(+usuario_idusuario, nombre);
+  const listas = await ListaService.getAll();
   return res.status(HttpStatusCodes.OK).json({ listas });
 }
 

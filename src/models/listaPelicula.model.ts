@@ -11,7 +11,6 @@ class ListaPelicula extends Model {
   @ForeignKey(() => Lista)
   @Column({
     primaryKey: true,
-    autoIncrement: true,
   })
   listaIdlista!: number;
 

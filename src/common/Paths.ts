@@ -4,6 +4,7 @@
 
 import Director from "@src/models/director.model";
 import Genero from "@src/models/genero.model";
+import ListaPelicula from "@src/models/listaPelicula.model";
 import { getOptionSections } from "ts-command-line-args";
 
 
@@ -99,6 +100,14 @@ export default {
   },
   PeliculaDirector: {
     Base: '/peliculaDirector',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  ListaPelicula: {
+    Base: '/listaPelicula',
     Get: '/',
     GetOne: '/:id',
     Add: '/',

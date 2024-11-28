@@ -11,8 +11,8 @@ export const LISTA_NOT_FOUND_ERR = 'Lista not found';
 /**
  * Get all listas by user.
  */
-function getAll(usuario_idusuario: number, nombre: string): Promise<ILista[]> {
-  return ListaRepo.getAllByUsuario(usuario_idusuario,nombre);
+function getAll(): Promise<ILista[]> {
+  return ListaRepo.getAll();
 }
 
 /**

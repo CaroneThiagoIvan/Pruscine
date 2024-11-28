@@ -3,10 +3,10 @@ import { ILista } from '@src/models/Lista';
 import ListaPelicula from '@src/models/listaPelicula.model';
 
 
-async function getAllByUsuario(usuario_idusuario: number, nombre: string): Promise<ILista[]> {
+async function getAll(): Promise<ILista[]> {
   try {
     const listas = await Lista.findAll({
-      where: { usuario_idusuario }
+
     });
     return listas.map((lista) => lista.toJSON() as ILista);
   } catch (error) {
@@ -20,7 +20,7 @@ async function getOneByUsuario(usuario_idusuario: number, nombre: string): Promi
     try {
       const lista = await Lista.findOne({
         where: {
-          usuario_idusuario,
+          idusuario: usuario_idusuario,
           nombre: nombre,
         }
       });
@@ -47,8 +47,8 @@ async function addLista(lista: ILista): Promise<string> {
     for (let i = 0; i < lista.peliculas.length; i++) {
       const element = lista.peliculas[i];
       await ListaPelicula.create({
-        peliculaIdpelicula: nuevaLista.idlista,
-        generoIdgenero: element
+        peliculaIdpelicula: element,
+        listaIdlista: nuevaLista.idlista
       });
     }
 
@@ -90,7 +90,7 @@ async function persist(usuario_idusuario: number, nombre: string): Promise<boole
 }
 
 export default {
-  getAllByUsuario,
+  getAll,
   getOneByUsuario,
   addLista,
   deleteLista,

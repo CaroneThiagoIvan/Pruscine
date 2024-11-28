@@ -1,4 +1,4 @@
-import { Table, Column, Model, ForeignKey, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, ForeignKey, DataType, AutoIncrement } from 'sequelize-typescript';
 import Usuario from './user.model';
 import Pelicula from './pelicula.model';
 
@@ -10,6 +10,7 @@ class Lista extends Model {
   @ForeignKey(() => Usuario)
   @Column({
     primaryKey: true,
+    autoIncrement: true,
   })
   idlista!: number;
 
