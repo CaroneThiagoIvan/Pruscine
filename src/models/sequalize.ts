@@ -5,6 +5,7 @@ import  Actor  from './actor.model';
 import  Director  from './director.model';
 import  Resena  from './resena.model';
 import User from './user.model';
+import Lista from './lista.model';
 
 
 
@@ -35,5 +36,9 @@ User.belongsToMany(Pelicula, { through: 'resena', foreignKey: 'usuario_idusuario
 // Relación Resena y User (N:N) para favoritos de reseñas
 Resena.belongsToMany(User, { through: 'favoritoR', foreignKey: 'resena_idresena' });
 User.belongsToMany(Resena, { through: 'favoritoR', foreignKey: 'usuario_idusuario' });
+
+// Relación Lista y Pelicula (N:N) para lista
+Lista.belongsToMany(Pelicula, { through: 'listaPelicula', foreignKey: 'lista_idlista' });
+Pelicula.belongsToMany(Lista, { through: 'listaPelicula', foreignKey: 'pelicula_idpelicula' });
 
 

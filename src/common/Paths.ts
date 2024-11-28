@@ -17,6 +17,10 @@ export default {
     Update: '/:id',
     Delete: '/:id',
   },
+  Img: {
+    Base: '/img',
+    Add: '/',
+  },
   Auth: {
     Base: '/auth',
     Login: '/'

@@ -40,7 +40,7 @@ async function getAll(id: number): Promise<IResena[]> {
         pelicula_idpelicula: id,
       }
     });
-    console.log("cacona chica");
+    
     return result.map((ids: { toJSON: () => IResena; }) => ids.toJSON() as IResena);
   } 
   catch (error) {
