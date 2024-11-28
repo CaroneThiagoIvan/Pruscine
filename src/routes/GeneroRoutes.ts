@@ -19,14 +19,15 @@ async function getOne(req: IReq, res: IRes) {
  */
 async function getAll(_: IReq, res: IRes) {
   const generos = await GeneroService.getAll();
-  return res.status(HttpStatusCodes.OK).json({ generos });
+  return res.status(HttpStatusCodes.OK).json( generos );
 }
 
 /**
  * Add one genero.
  */
-async function add(req: IReq<{ genero: IGenero }>, res: IRes) {
-  const { genero } = req.body;
+async function add(req: IReq<IGenero>, res: IRes) {
+  const genero = req.body;
+  console.log("cuarto log: " + JSON.stringify(genero));
   await GeneroService.add(genero);
   return res.status(HttpStatusCodes.CREATED).end();
 }

@@ -2,6 +2,7 @@ import moment from 'moment';
 import { DataTypes } from 'sequelize';
 import { table } from 'console';
 
+
 // **** Variables **** //
 
 const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' + 
@@ -10,9 +11,8 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 
 // **** Types **** //
 
-export interface IPais {
-  idpais: number;
-  nombre: string;
+export interface IListaPelicula {
+    lista_idlista: number;
+    pelicula_idpelicula: number;
 }
-
 

@@ -32,39 +32,55 @@ async function persists(usuario_idusuario: number, pelicula_idpelicula: number):
   });
 }
 
-async function getAll(): Promise<IResena[]> {
+async function getAll(id: number): Promise<IResena[]> {
+
   try {
+    const result = await Resena.findAll({
+      where: {
+        pelicula_idpelicula: id,
+      }
+    });
     
-    const resenas = await Resena.findAll();
-    return resenas.map((resena: { toJSON: () => IResena; }) => resena.toJSON() as IResena);
-
-  } catch (error) {
-    console.error("Error retrieving resena:", error);
-    return []; 
+    return result.map((ids: { toJSON: () => IResena; }) => ids.toJSON() as IResena);
+  } 
+  catch (error) {
+      console.error("Error retrieving generos:", error);
+      return []; 
   }
-}
+};
 
-async function add(resena: IResena): Promise<void> {
+async function add(resena: IResena): Promise<string | void> {
     try {
+      console.log("skibidi resena");
+      console.log(resena);
+
+      console.log(resena.description);
+      console.log(resena.rating);
+      console.log(resena.idusuario);
+      console.log(resena.movie);
+
       await Resena.create({
-        usuario_idusuario: resena.usuario_idusuario,
-        pelicula_idpelicula: resena.pelicula_idpelicula,
+        descripcion: resena.description,
+        calificacion: resena.rating,
+        usuario_idusuario: resena.idusuario,
+        pelicula_idpelicula: resena.movie
       });
-  
+
+      return "Pelicula creada con éxito";
     } catch (error) {
       console.error("Error adding resena:", error);
-  
+      throw error;
     }
   }
 
 
 async function update(resena: IResena): Promise<void> {
   try {
-
+    
     await Resena.update(resena, {
       where: {
-        usuario_idusuario: resena.usuario_idusuario,
-        pelicula_idpelicula: resena.pelicula_idpelicula
+        usuario_idusuario: resena.idusuario,
+        pelicula_idpelicula: resena.movie
       }
     });
 

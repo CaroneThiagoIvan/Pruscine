@@ -24,13 +24,13 @@ import "./sql/connection";
 
 const express = require('express');
 const cors = require('cors');
-
 const app = express();
 
 // Use CORS middleware
 app.use(cors());
 
 // **** Setup **** //
+app.use('/img', express.static('../imagenes'));
 
 // Basic middleware
 app.use(express.json());

@@ -11,16 +11,13 @@ class Lista extends Model {
   @Column({
     primaryKey: true,
   })
-  usuarioIdusuario!: number;
-
-  @ForeignKey(() => Pelicula)
-  @Column({
-    primaryKey: true,
-  })
-  peliculaIdpelicula!: number;
+  idlista!: number;
 
   @Column(DataType.STRING)
   nombre!: string;
+
+  @Column(DataType.INTEGER)
+  idusuario!: number;
 }
 
 export default Lista;

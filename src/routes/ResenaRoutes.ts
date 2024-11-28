@@ -10,9 +10,10 @@ import ResenaService from '@src/services/ResenaService';
 /**
  * Get all users.
  */
-async function getAll(_: IReq, res: IRes) {
-    const resena = await ResenaService.getAll();
-    return res.status(HttpStatusCodes.OK).json({ resena });
+async function getAll(req: IReq, res: IRes) {
+  const id = +req.params.id;
+  const resena = await ResenaService.getAll(id);
+  return res.status(HttpStatusCodes.OK).json(resena);
 }
 
 async function getOne(req: IReq, res: IRes) {
@@ -27,6 +28,8 @@ async function getOne(req: IReq, res: IRes) {
  */
 async function add(req: IReq<IResena>, res: IRes) {
   const resena = req.body;
+  console.log("alo");
+  console.log(resena);
   await ResenaService.addOne(resena);
   return res.status(HttpStatusCodes.CREATED).end();
 }
@@ -43,9 +46,13 @@ async function update(req: IReq<IResena>, res: IRes) {
 /**
  * Delete one user.
  */
-async function delete_(req: IReq, res: IRes) {
-  const usuario_idusuario = +req.params.usuario_idusuario;
-  const pelicula_idpelicula = +req.params.pelicula_idpelicula;
+async function delete_(req: IReq<{id_usuario: number, id_pelicula: number}>, res: IRes) {
+  console.log("body");
+  console.log(req.body);
+  const usuario_idusuario = +req.body.id_usuario;
+  const pelicula_idpelicula = +req.body.id_pelicula;
+  console.log("routes");
+  console.log(usuario_idusuario,pelicula_idpelicula)
   await ResenaService.delete(usuario_idusuario,pelicula_idpelicula);
   return res.status(HttpStatusCodes.OK).end();
 }

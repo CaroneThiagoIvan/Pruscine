@@ -17,6 +17,10 @@ export default {
     Update: '/:id',
     Delete: '/:id',
   },
+  Img: {
+    Base: '/img',
+    Add: '/',
+  },
   Auth: {
     Base: '/auth',
     Login: '/'
@@ -71,6 +75,30 @@ export default {
   },
   Genero: {
     Base: '/genero',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  PeliculaGenero: {
+    Base: '/peliculaGenero',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  PeliculaActor: {
+    Base: '/peliculaActor',
+    Get: '/',
+    GetOne: '/:id',
+    Add: '/',
+    Update: '/:id',
+    Delete: '/:id',
+  },
+  PeliculaDirector: {
+    Base: '/peliculaDirector',
     Get: '/',
     GetOne: '/:id',
     Add: '/',

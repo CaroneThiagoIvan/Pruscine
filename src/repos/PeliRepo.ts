@@ -1,6 +1,9 @@
 import * as jwt from 'jsonwebtoken'
 import { IPelicula } from '@src/models/Pelicula';
 import Pelicula from '@src/models/pelicula.model';
+import PeliculaGenero from '@src/models/peliculaGenero.model';
+import PeliculaDirector from '@src/models/peliculaDirector.model';
+import PeliculaActor from '@src/models/peliculaActor.model';
 
 // **** Functions **** //
 
@@ -52,13 +55,39 @@ async function getAll(): Promise<IPelicula[]> {
 async function add(pelicula: IPelicula): Promise<string | void> {
   try {
 
-    await Pelicula.create({
+    const nuevaPelicula = await Pelicula.create({
       nombre: pelicula.nombre,
       anioPublicado: pelicula.anioPublicado,
-      generoIDgenero: pelicula.genero_idgenero,
-      peliculaIDactor: pelicula.pelicula_idactor,
-      peliculaIDdirector: pelicula.pelicula_iddirector
+      pais: pelicula.pais
     });
+
+    console.log("skibidi peli")
+    console.log(pelicula)
+    
+    for (let i = 0; i < pelicula.generos.length; i++) {
+      const element = pelicula.generos[i];
+      await PeliculaGenero.create({
+        peliculaIdpelicula: nuevaPelicula.idpelicula,
+        generoIdgenero: element
+      });
+    }
+
+    for (let i = 0; i < pelicula.actores.length; i++) {
+      const element = pelicula.generos[i];
+      await PeliculaActor.create({
+        peliculaIdpelicula: nuevaPelicula.idpelicula,
+        actorIdactor: element
+      });
+    }
+
+    for (let i = 0; i < pelicula.directores.length; i++) {
+      const element = pelicula.directores[i];
+      await PeliculaDirector.create({
+        peliculaIdpelicula: nuevaPelicula.idpelicula,
+        directorIddirector: element
+      });
+    }
+    
 
     return 'Pelicula creada con éxito';
   } catch (error) {
@@ -75,9 +104,7 @@ async function update(pelicula: IPelicula): Promise<void> {
 let peliculaupdate = {
     nombre: pelicula.nombre,
     anioPublicado: pelicula.anioPublicado,
-    generoIDgenero: pelicula.genero_idgenero,
-    peliculaIDactor: pelicula.pelicula_idactor,
-    peliculaIDdirector: pelicula.pelicula_iddirector
+    pais: pelicula.pais
 }
     await Pelicula.update(peliculaupdate, {
       where: {

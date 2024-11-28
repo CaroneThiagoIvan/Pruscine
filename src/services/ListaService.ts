@@ -27,6 +27,8 @@ async function getOne(usuario_idusuario: number, nombre: string): Promise<ILista
  */
 async function add(lista: ILista): Promise<string | void> {
   try {
+    console.log("lista service")
+    console.log(lista);
     return await ListaRepo.addLista(lista);
   } catch (err) {
     console.error('Error in add lista:', err);

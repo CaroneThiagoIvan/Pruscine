@@ -5,18 +5,20 @@ import User from '@src/models/user.model';
 export async function checkUserRole(req: Request, res: Response, next: NextFunction) {
   try {
     // Obtener el token del encabezado de autorización
-    console.log("entro")
+    console.log("entro2")
     const token = req.headers.authorization?.split(' ')[1];
+    console.log(token);
     if (!token) {
       return res.status(401).json({ message: 'Token no proporcionado' });
     }
 
     const decoded: any = jwt.verify(token, "prusci");
     console.log(decoded);
-    const usuarioid = decoded.data;
-    console.log(usuarioid);
+    const userdata = decoded.idusuario;
+    console.log(userdata);
     // Obtener el usuario de la base de datos
-    const usuario = await User.findByPk(usuarioid);
+    const usuario = await User.findByPk(userdata);
+    
     if (!usuario) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }

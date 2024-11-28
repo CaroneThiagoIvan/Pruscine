@@ -47,12 +47,13 @@ async function getAll(): Promise<IDirector[]> {
 /**
  * Add new director.
  */
-async function add(director: IDirector): Promise<string | void> {
+async function add(director: any): Promise<string | void> {
   try {
+    console.log("quinto log: " + JSON.stringify(director));
     await Director.create({
-      nombre: director.nombre,
-      fechaNacimiento: director.fechaNacimiento,
-      descripcion: director.descripcion
+      nombre: director.director.nombre,
+      fechaNacimiento: director.director.fechaNacimiento,
+      descripcion: director.director.descripcion,
     });
     return 'Director creado con éxito';
   } catch (error) {

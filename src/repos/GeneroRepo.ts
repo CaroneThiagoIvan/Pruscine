@@ -47,10 +47,11 @@ async function getAll(): Promise<IGenero[]> {
 /**
  * Add new genero.
  */
-async function add(genero: IGenero): Promise<string | void> {
+async function add(genero: any): Promise<string | void> {
   try {
+    console.log("quinto log: " + JSON.stringify(genero));
     await Genero.create({
-      nombre: genero.nombre,
+      nombre: genero.genero.nombre,
     });
     return 'Genero creado con éxito';
   } catch (error) {

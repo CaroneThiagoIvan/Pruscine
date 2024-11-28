@@ -12,9 +12,10 @@ const INVALID_CONSTRUCTOR_PARAM = 'nameOrObj arg must a string or an object ' +
 // **** Types **** //
 
 export interface ILista {
-  usuario_idusuario: number;
-  pelicula_idpelicula: number;
+  idlista: number;
   nombre: string;
+  idusuario: number;
+  peliculas: number[];
 }
 
 
