@@ -1,5 +1,6 @@
 import Lista from '@src/models/lista.model';
 import { ILista } from '@src/models/Lista';
+import ListaPelicula from '@src/models/listaPelicula.model';
 
 
 async function getAllByUsuario(usuario_idusuario: number, nombre: string): Promise<ILista[]> {
@@ -32,14 +33,30 @@ async function getOneByUsuario(usuario_idusuario: number, nombre: string): Promi
 
 async function addLista(lista: ILista): Promise<string> {
   try {
-    await Lista.create({
-      idusuario: lista.usuario_idusuario,
-      nombreLista: lista.nombre,
+
+    console.log("skibidi lista")
+    console.log(lista)
+    console.log(lista.nombre)
+    console.log(lista.idusuario)
+
+    const nuevaLista = await Lista.create({
+      nombre: lista.nombre,
+      idusuario: lista.idusuario
     });
+    
+    for (let i = 0; i < lista.peliculas.length; i++) {
+      const element = lista.peliculas[i];
+      await ListaPelicula.create({
+        peliculaIdpelicula: nuevaLista.idlista,
+        generoIdgenero: element
+      });
+    }
+
+
     return 'Lista creada con éxito';
   } catch (error) {
     console.error('Error adding lista:', error);
-    throw error;
+    throw error; 
   }
 }
 

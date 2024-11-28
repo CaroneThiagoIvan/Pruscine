@@ -16,6 +16,8 @@ import GeneroPeliRoutes from './GeneroPeliRoutes';
 import ActorPeliRoutes from './ActorPeliRoutes';
 import DirectorPeliRoutes from './DirectorPeliRoutes';
 import ResenaRoutes from './ResenaRoutes';
+import { upload } from '@src/middleware/multerImages';
+import { ImgRoutes } from './ImgRoutes';
 
 
 // **** Variables **** //
@@ -37,6 +39,14 @@ const GeneroRepo = Router();
 const GeneroPeliRepo = Router();
 const ActorPeliRepo = Router();
 const DirectorPeliRepo = Router();
+const ImgRouter = Router();
+
+ImgRouter.post(
+  Paths.Img.Add,
+  authenticateToken,
+  upload.single('file'),
+  ImgRoutes.add,
+);
 
 UserRouter.get(
   Paths.Users.Get,
@@ -175,6 +185,7 @@ ListaRepo.get(
 
 ListaRepo.post(
   Paths.Lista.Add,
+  authenticateToken, // Verificación del token
   ListaRoutes.add,
 );
 
@@ -290,6 +301,7 @@ apiRouter.use(Paths.Genero.Base, GeneroRepo);
 apiRouter.use(Paths.PeliculaGenero.Base, GeneroPeliRepo);
 apiRouter.use(Paths.PeliculaActor.Base, ActorPeliRepo);
 apiRouter.use(Paths.PeliculaDirector.Base, DirectorPeliRepo);
+apiRouter.use(Paths.Img.Base, ImgRouter);
 
 // **** Export default **** //
 

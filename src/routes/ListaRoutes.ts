@@ -27,8 +27,10 @@ async function getAll(req: IReq, res: IRes) {
 /**
  * Add a new lista for a user.
  */
-async function add(req: IReq<{ lista: ILista }>, res: IRes) {
-  const { lista } = req.body;
+async function add(req: IReq<ILista>, res: IRes) {
+  console.log("reqbody")
+  console.log(req.body);
+  const lista = req.body;
   await ListaService.add(lista);
   return res.status(HttpStatusCodes.CREATED).end();
 }
