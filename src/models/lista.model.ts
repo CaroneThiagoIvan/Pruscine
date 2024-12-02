@@ -7,7 +7,6 @@ import Pelicula from './pelicula.model';
   timestamps: false,
 })
 class Lista extends Model {
-  @ForeignKey(() => Usuario)
   @Column({
     primaryKey: true,
     autoIncrement: true,

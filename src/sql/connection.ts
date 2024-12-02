@@ -20,8 +20,8 @@ dotenv.config({ path: './env/production.env' });
 const sequelize = new Sequelize({
   database: 'prucine',
   dialect: 'mysql',
-  username: 'alumno',
-  password: 'alumnoipm',
+  username: 'root',
+  password: 'root',
   host: 'localhost',
   port: 3306,
   logging: console.log,

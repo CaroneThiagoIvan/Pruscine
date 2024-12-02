@@ -18,8 +18,12 @@ function getAll(): Promise<ILista[]> {
 /**
  * Get one lista by user and list name.
  */
-async function getOne(usuario_idusuario: number, nombre: string): Promise<ILista | null> {
-  return ListaRepo.getOneByUsuario(usuario_idusuario, nombre);
+async function getOne(id: number): Promise<ILista | null> {
+  return ListaRepo.getOne(id);
+}
+
+async function getListasUsuario(id: number): Promise<ILista[]> {
+  return ListaRepo.getListasUsuario(id);
 }
 
 /**
@@ -56,6 +60,7 @@ async function delete_(usuario_idusuario: number, nombre: string): Promise<void>
 export default {
   getAll,
   getOne,
+  getListasUsuario,
   add,
   delete: delete_,
 } as const;

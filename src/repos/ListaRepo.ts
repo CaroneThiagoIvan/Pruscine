@@ -16,12 +16,11 @@ async function getAll(): Promise<ILista[]> {
 }
 
 
-async function getOneByUsuario(usuario_idusuario: number, nombre: string): Promise<ILista | null> {
+async function getOne(id: number): Promise<ILista | null> {
     try {
       const lista = await Lista.findOne({
         where: {
-          idusuario: usuario_idusuario,
-          nombre: nombre,
+          idlista: id,
         }
       });
       return lista ? lista.toJSON() as ILista : null;
@@ -29,7 +28,21 @@ async function getOneByUsuario(usuario_idusuario: number, nombre: string): Promi
       console.error("Error retrieving lista:", error);
       return null;
     }
+}
+
+async function getListasUsuario(id: number): Promise<ILista[]> {
+  try {
+    const listas = await Lista.findAll({
+      where: {
+        idusuario: id
+      }
+    });
+    return listas.map((lista) => lista.toJSON() as ILista);
+  } catch (error) {
+    console.error("Error retrieving listas:", error);
+    return [];
   }
+}
 
 async function addLista(lista: ILista): Promise<string> {
   try {
@@ -43,7 +56,7 @@ async function addLista(lista: ILista): Promise<string> {
       nombre: lista.nombre,
       idusuario: lista.idusuario
     });
-    
+    console.log("creo lista");
     for (let i = 0; i < lista.peliculas.length; i++) {
       const element = lista.peliculas[i];
       await ListaPelicula.create({
@@ -91,7 +104,8 @@ async function persist(usuario_idusuario: number, nombre: string): Promise<boole
 
 export default {
   getAll,
-  getOneByUsuario,
+  getOne,
+  getListasUsuario,
   addLista,
   deleteLista,
   persist

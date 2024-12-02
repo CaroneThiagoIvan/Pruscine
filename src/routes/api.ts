@@ -183,7 +183,13 @@ ListaRepo.get(
 ListaRepo.get(
   Paths.Lista.GetOne,
   ListaRoutes.getOne,
-);  
+);
+
+ListaRepo.get(
+  Paths.Lista.GetListasUsuario,
+  authenticateToken, // Verificación del token
+  ListaRoutes.getListasUsuario,
+);
 
 ListaRepo.post(
   Paths.Lista.Add,

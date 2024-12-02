@@ -54,6 +54,7 @@ export default {
     Base: '/lista',
     Get: '/',
     GetOne: '/:id',
+    GetListasUsuario: '/usuario/:id',
     Add: '/',
     Update: '/:id',
     Delete: '/:id',

@@ -9,8 +9,8 @@ import { IReq, IRes } from './types/express/misc';
  * Get one lista by user.
  */
 async function getOne(req: IReq, res: IRes) {
-  const { usuario_idusuario, nombre } = req.params;
-  const lista = await ListaService.getOne(+usuario_idusuario, nombre);
+  const id = +req.params.id;
+  const lista = await ListaService.getOne(id);
   return res.status(HttpStatusCodes.OK).json({lista});
 }
 
@@ -20,6 +20,13 @@ async function getOne(req: IReq, res: IRes) {
 async function getAll(req: IReq, res: IRes) {
   const listas = await ListaService.getAll();
   return res.status(HttpStatusCodes.OK).json({ listas });
+}
+
+async function getListasUsuario(req: IReq, res: IRes) {
+  const id = +req.params.id;
+  const listas = await ListaService.getListasUsuario(id);
+  return res.status(HttpStatusCodes.OK).json({ listas });
+
 }
 
 /**
@@ -48,6 +55,7 @@ async function delete_(req: IReq, res: IRes) {
 export default {
   getAll,
   getOne,
+  getListasUsuario,
   add,
   delete: delete_,
 } as const;
