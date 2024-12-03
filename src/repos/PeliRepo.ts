@@ -52,6 +52,16 @@ async function getAll(): Promise<IPelicula[]> {
   }
 }
 
+async function getAllPaginada(): Promise<IPelicula[]> {
+  try {
+    const peliculas = await Pelicula.findAll(); // Obtener todas las películas
+    return peliculas.map((pelicula: { toJSON: () => IPelicula; }) => pelicula.toJSON() as IPelicula); // Convertir a objetos planos
+  } catch (error) {
+    console.error("Error retrieving peliculas:", error);
+    return [];  // Devolver un array vacío en caso de error
+  }
+}
+
 async function add(pelicula: IPelicula): Promise<string | void> {
   try {
 
@@ -141,6 +151,7 @@ export default {
   getOne,
   persists,
   getAll,
+  getAllPaginada,
   add,
   update,
   delete: delete_,

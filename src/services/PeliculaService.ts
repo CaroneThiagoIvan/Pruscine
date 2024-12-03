@@ -72,12 +72,32 @@ async function _delete(id: number): Promise<void> {
   return PeliRepo.delete(id);
 }
 
+async function getPaginated(page: number, limit: number) {
+  const offset = (page - 1) * limit;
+
+  // Obtener todas las películas usando el método getAllPaginada
+  const allPeliculas = await PeliRepo.getAllPaginada();  // Esto ahora usa tu función de paginación
+
+  // Aplicar la paginación manualmente
+  const peliculas = allPeliculas.slice(offset, offset + limit);  // Slice para obtener solo las películas de la página actual
+
+  // Calcular el total de elementos y páginas
+  const totalItems = allPeliculas.length;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  return {
+    peliculas,   // Array de películas para la página actual
+    totalItems,  // Total de películas disponibles
+    totalPages,  // Total de páginas
+  };
+}
 
 // **** Export default **** //
 
 export default {
   getAll,
   getOne,
+  getPaginated,
   addOne,
   updateOne,
   delete: _delete,

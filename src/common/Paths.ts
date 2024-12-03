@@ -46,6 +46,7 @@ export default {
     Base: '/pelicula',
     Get: '/',
     GetOne: '/:id',
+    GetPaginada: '/',
     Add: '/',
     Update: '/:id',
     Delete: '/:id',

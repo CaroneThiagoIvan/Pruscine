@@ -50,12 +50,35 @@ async function delete_(req: IReq, res: IRes) {
   return res.status(HttpStatusCodes.OK).end();
 }
 
+async function getAllPaginada(req: IReq, res: IRes) {
+  try {
+    const { page = 1, limit = 8 } = req.query;  // Parámetros de la query
+    const pageNumber = parseInt(page as string, 8);
+    const limitNumber = parseInt(limit as string, 8);
+
+    const { peliculas, totalItems, totalPages } = await PeliculaService.getPaginated(pageNumber, limitNumber);
+
+    return res.status(HttpStatusCodes.OK).json({
+      data: peliculas,      // Envuelve las películas dentro de 'data'
+      totalItems,
+      totalPages,
+      currentPage: pageNumber,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Error fetching paginated movies',
+      error: error.message,
+    });
+  }
+}
 
 // **** Export default **** //
 
 export default {
   getAll,
   getOne,
+  getAllPaginada,
   add,
   update,
   delete: delete_,

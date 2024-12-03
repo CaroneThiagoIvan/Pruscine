@@ -154,6 +154,11 @@ PeliRepo.get(
   PeliculaRoutes.getOne,	
 );
 
+PeliRepo.get(
+  Paths.Pelicula.GetPaginada,
+  PeliculaRoutes.getAllPaginada,
+);
+
 PeliRepo.post(
   Paths.Pelicula.Add,
   authenticateToken, // Verificación del token
